@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nearby — Xplore Kapil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ============================================================
+           XPLORE — NEARBY PAGE (PROFESSIONAL EDITION)
+           ============================================================ */
+
+        :root {
+            --ink: #1a2a24;
+            --deep: #1a3a30;
+            --deep-2: #0f2a22;
+            --ivory: #f7f4ea;
+            --sand: #e8ddc8;
+            --line: #d6cab8;
+            --terracotta: #b85a3a;
+            --sunset: #dd8a5a;
+            --sea: #3a7a6a;
+            --white: #ffffff;
+            --muted: #5a6a62;
+            --gold: #c9a84c;
+            --shadow-sm: 0 2px 8px rgba(18, 38, 30, 0.06);
+            --shadow: 0 8px 40px rgba(18, 38, 30, 0.10);
+            --shadow-lg: 0 24px 64px rgba(18, 38, 30, 0.14);
+            --shadow-xl: 0 40px 80px rgba(18, 38, 30, 0.18);
+            --radius: 8px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --container: 1280px;
+            --font-serif: 'Fraunces', serif;
+            --font-sans: 'Inter', sans-serif;
+            --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        :focus-visible {
+            outline: 2.5px solid var(--terracotta);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s var(--ease-smooth);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92) translateY(20px);
+            transition: all 0.9s var(--ease-bounce);
+        }
+        .reveal-scale.is-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* ===== UTILITIES ===== */
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+        }
+        .eyebrow.on-dark {
+            color: var(--sunset);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 14px;
+            border: 2px solid transparent;
+            transition: all 0.3s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-100%);
+            transition: transform 0.5s var(--ease);
+        }
+        .btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            background: var(--deep);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--deep-2);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(26, 58, 48, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--deep);
+            border-color: var(--line);
+        }
+        .btn-outline:hover {
+            border-color: var(--deep);
+            background: var(--deep);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .btn-sm {
+            padding: 10px 22px;
+            font-size: 12px;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.5s var(--ease-smooth);
+            background: var(--ivory);
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
+        }
+        .nav.scrolled {
+            background: rgba(247, 244, 234, 0.92);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
+        }
+        .nav-inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding: 0 20px;
+            }
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            transition: transform 0.3s var(--ease);
+        }
+        .logo:hover {
+            transform: scale(1.03);
+        }
+        .logo em {
+            font-style: normal;
+            color: var(--terracotta);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 34px;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+        .nav-links a {
+            opacity: 0.85;
+            transition: all 0.3s var(--ease);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: -4px;
+            height: 2px;
+            background: var(--terracotta);
+            transition: right 0.3s var(--ease);
+        }
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        .nav-links a:hover::after {
+            right: 0;
+        }
+        .nav-links a.active {
+            opacity: 1;
+        }
+        .nav-links a.active::after {
+            right: 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-menu-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid currentColor;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+            background: transparent;
+            font-size: 18px;
+            transition: transform 0.3s var(--ease);
+        }
+        .nav-menu-btn:hover {
+            transform: rotate(90deg);
+        }
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-menu-btn {
+                display: flex;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: var(--deep-2);
+            padding: 32px 28px;
+            transform: translateY(-100%);
+            transition: transform 0.6s var(--ease-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+        .mobile-menu-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mobile-menu .logo {
+            color: var(--white);
+        }
+        .mobile-menu .logo em {
+            color: var(--sunset);
+        }
+        .mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s var(--ease);
+        }
+        .mobile-menu-close:hover {
+            transform: rotate(90deg);
+        }
+        .mobile-menu-links {
+            margin-top: 56px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mobile-menu-links a {
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 600;
+            opacity: 0.7;
+            transition: all 0.3s var(--ease);
+            transform: translateX(-20px);
+        }
+        .mobile-menu-links a:hover {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--sunset);
+        }
+        .mobile-menu-links a:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .mobile-menu-links a:nth-child(2) {
+            transition-delay: 0.10s;
+        }
+        .mobile-menu-links a:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+        .mobile-menu-links a:nth-child(4) {
+            transition-delay: 0.20s;
+        }
+        .mobile-menu-links a:nth-child(5) {
+            transition-delay: 0.25s;
+        }
+
+        /* ============================================================
+           HERO — CINEMATIC
+           ============================================================ */
+        .nearby-hero {
+            padding: 150px 0 70px;
+            background: linear-gradient(165deg, #0a1a15 0%, #1a3a30 45%, #0f2a22 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .nearby-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 80%, rgba(221, 138, 90, 0.06), transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 20%, rgba(58, 122, 106, 0.05), transparent 60%);
+        }
+        .nearby-hero .bg-glow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .nearby-hero .bg-glow .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            animation: orb-float 30s ease-in-out infinite alternate;
+        }
+        .nearby-hero .bg-glow .orb:nth-child(1) {
+            top: -15%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(58, 122, 106, 0.25), transparent 70%);
+            animation-duration: 25s;
+        }
+        .nearby-hero .bg-glow .orb:nth-child(2) {
+            bottom: -15%;
+            left: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(221, 138, 90, 0.18), transparent 70%);
+            animation-duration: 30s;
+            animation-delay: 3s;
+        }
+        .nearby-hero .bg-glow .orb:nth-child(3) {
+            top: 40%;
+            left: 45%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(184, 90, 58, 0.10), transparent 70%);
+            animation-duration: 20s;
+            animation-delay: 6s;
+        }
+
+        @keyframes orb-float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(40px, -30px) scale(1.15);
+            }
+            100% {
+                transform: translate(-30px, 40px) scale(0.85);
+            }
+        }
+
+        .nearby-hero .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .nearby-hero .eyebrow {
+            color: var(--sunset);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 20px;
+            border-radius: 30px;
+            background: rgba(221, 138, 90, 0.08);
+            border: 1px solid rgba(221, 138, 90, 0.12);
+            backdrop-filter: blur(8px);
+        }
+        .nearby-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 5.5vw, 62px);
+            margin: 16px 0 18px;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+        .nearby-hero h1 .highlight {
+            background: linear-gradient(135deg, var(--sunset), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        .nearby-hero h1 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sunset), transparent);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+        .nearby-hero p {
+            font-size: 17px;
+            opacity: 0.75;
+            max-width: 520px;
+            margin-bottom: 34px;
+            line-height: 1.7;
+            font-weight: 300;
+            letter-spacing: 0.01em;
+        }
+
+        /* Quick Action Chips */
+        .quick-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .quick-chip {
+            padding: 10px 24px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.4s var(--ease-bounce);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .quick-chip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(221, 138, 90, 0.12), rgba(58, 122, 106, 0.06));
+            opacity: 0;
+            transition: opacity 0.4s var(--ease);
+        }
+        .quick-chip:hover {
+            background: rgba(221, 138, 90, 0.10);
+            border-color: rgba(221, 138, 90, 0.2);
+            color: var(--white);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(221, 138, 90, 0.06);
+        }
+        .quick-chip:hover::before {
+            opacity: 1;
+        }
+        .quick-chip i {
+            font-size: 14px;
+            color: var(--sunset);
+            position: relative;
+            z-index: 1;
+        }
+        .quick-chip span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================================
+           SEARCH BAR — PREMIUM GLASS
+           ============================================================ */
+        .search-section {
+            background: rgba(255, 255, 255, 0.70);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border-bottom: 1px solid var(--line);
+            padding: 24px 0;
+            position: sticky;
+            top: 76px;
+            z-index: 100;
+            transition: all 0.4s var(--ease-smooth);
+        }
+        .search-section.scrolled {
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+            background: rgba(255, 255, 255, 0.85);
+        }
+        .search-wrapper {
+            display: flex;
+            gap: 0;
+            align-items: center;
+            max-width: 780px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 60px;
+            padding: 4px 4px 4px 28px;
+            border: 1.5px solid var(--line);
+            transition: all 0.5s var(--ease-smooth);
+            box-shadow: var(--shadow-sm);
+        }
+        .search-wrapper:focus-within {
+            border-color: var(--sea);
+            box-shadow: 0 8px 50px rgba(58, 122, 106, 0.06), 0 0 0 4px rgba(58, 122, 106, 0.03);
+            transform: translateY(-2px);
+        }
+        .search-wrapper .search-icon-wrap {
+            color: var(--muted);
+            font-size: 18px;
+            transition: color 0.4s var(--ease);
+        }
+        .search-wrapper:focus-within .search-icon-wrap {
+            color: var(--sea);
+        }
+        .search-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            font-family: var(--font-sans);
+            padding: 16px 16px 16px 12px;
+            color: var(--ink);
+            background: transparent;
+            font-weight: 400;
+        }
+        .search-wrapper input::placeholder {
+            color: var(--muted);
+            font-weight: 300;
+        }
+        .search-wrapper .search-btn {
+            background: linear-gradient(135deg, var(--deep), var(--sea));
+            color: var(--white);
+            padding: 14px 36px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.4s var(--ease-bounce);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.02em;
+        }
+        .search-wrapper .search-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--sea), var(--deep));
+            opacity: 0;
+            transition: opacity 0.4s var(--ease);
+        }
+        .search-wrapper .search-btn:hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(58, 122, 106, 0.20);
+        }
+        .search-wrapper .search-btn:hover::before {
+            opacity: 1;
+        }
+        .search-wrapper .search-btn span {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .search-wrapper .search-btn span i {
+            transition: transform 0.3s var(--ease);
+        }
+        .search-wrapper .search-btn:hover span i {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .search-wrapper {
+                flex-wrap: wrap;
+                padding: 4px 4px 4px 16px;
+                border-radius: 24px;
+                background: transparent;
+                border: none;
+                box-shadow: none;
+                gap: 12px;
+            }
+            .search-wrapper:focus-within {
+                transform: none;
+                box-shadow: none;
+            }
+            .search-wrapper input {
+                width: 100%;
+                order: 1;
+                padding: 16px 20px;
+                background: var(--white);
+                border-radius: 60px;
+                border: 1.5px solid var(--line);
+                font-size: 15px;
+            }
+            .search-wrapper input:focus {
+                border-color: var(--sea);
+                box-shadow: 0 0 0 4px rgba(58, 122, 106, 0.04);
+            }
+            .search-wrapper .search-btn {
+                width: 100%;
+                justify-content: center;
+                order: 2;
+                padding: 16px;
+            }
+            .search-wrapper .search-icon-wrap {
+                display: none;
+            }
+        }
+
+        /* ============================================================
+           CATEGORY TABS
+           ============================================================ */
+        .category-tabs-section {
+            background: var(--ivory);
+            padding: 28px 0 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .category-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 16px;
+            scrollbar-width: none;
+        }
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .category-tab {
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            border: 1.5px solid var(--line);
+            transition: all 0.4s var(--ease-bounce);
+            background: var(--white);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--deep), var(--sea));
+            opacity: 0;
+            transition: opacity 0.4s var(--ease);
+        }
+        .category-tab:hover {
+            border-color: var(--sea);
+            color: var(--sea);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        .category-tab:hover::before {
+            opacity: 0.04;
+        }
+        .category-tab i {
+            font-size: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .category-tab span {
+            position: relative;
+            z-index: 1;
+        }
+        .category-tab .count-badge {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--muted);
+            padding: 0 10px;
+            border-radius: 20px;
+            line-height: 20px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.5;
+            transition: all 0.3s var(--ease);
+        }
+        .category-tab.active .count-badge {
+            background: var(--white);
+            color: var(--deep);
+            opacity: 0.8;
+        }
+        .category-tab.active {
+            background: var(--deep);
+            color: var(--white);
+            border-color: var(--deep);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 32px rgba(26, 58, 48, 0.15);
+        }
+        .category-tab.active::before {
+            display: none;
+        }
+
+        /* ============================================================
+           RESULTS SECTION
+           ============================================================ */
+        .results-section {
+            padding: 48px 0 100px;
+            background: var(--ivory);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .results-header .left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .results-header h2 {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .results-header .count {
+            font-size: 13px;
+            color: var(--muted);
+            background: var(--white);
+            padding: 4px 20px;
+            border-radius: 40px;
+            border: 1px solid var(--line);
+            font-weight: 500;
+        }
+        .results-header .count span {
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== RESULT CARD — PREMIUM ===== */
+        .result-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px 26px;
+            border: 1px solid var(--line);
+            transition: all 0.5s var(--ease-smooth);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .result-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(58, 122, 106, 0.02), rgba(221, 138, 90, 0.01));
+            opacity: 0;
+            transition: opacity 0.5s var(--ease);
+        }
+        .result-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sea), var(--sunset));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-smooth);
+        }
+        .result-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--sea);
+        }
+        .result-card:hover::before {
+            opacity: 1;
+        }
+        .result-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .result-card .icon-wrap {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            transition: all 0.5s var(--ease-bounce);
+        }
+        .result-card:hover .icon-wrap {
+            transform: scale(1.12) rotate(-6deg);
+        }
+
+        .result-card .info {
+            flex: 1;
+            min-width: 0;
+        }
+        .result-card .info h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            transition: color 0.3s var(--ease);
+            letter-spacing: -0.01em;
+        }
+        .result-card:hover .info h3 {
+            color: var(--sea);
+        }
+        .result-card .info .meta {
+            font-size: 12.5px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            line-height: 1.5;
+        }
+        .result-card .info .meta i {
+            font-size: 11px;
+            opacity: 0.6;
+        }
+        .result-card .info .meta .tag {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            padding: 2px 14px;
+            border-radius: 20px;
+            line-height: 20px;
+        }
+        .result-card .info .meta .tag.emergency-tag {
+            background: #c0392b;
+        }
+        .result-card .info .meta .tag.medical-tag {
+            background: #e74c3c;
+        }
+        .result-card .info .meta .tag.essential-tag {
+            background: #f39c12;
+        }
+        .result-card .info .meta .tag.transport-tag {
+            background: #3498db;
+        }
+        .result-card .info .meta .tag.service-tag {
+            background: #8e44ad;
+        }
+        .result-card .info .meta .tag.entertainment-tag {
+            background: #e67e22;
+        }
+
+        .result-card .distance {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--sea);
+            white-space: nowrap;
+            flex-shrink: 0;
+            background: rgba(58, 122, 106, 0.05);
+            padding: 4px 16px;
+            border-radius: 40px;
+            transition: all 0.4s var(--ease-smooth);
+            font-feature-settings: "tnum";
+        }
+        .result-card:hover .distance {
+            background: var(--sea);
+            color: var(--white);
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(58, 122, 106, 0.15);
+        }
+
+        .result-card .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            transition: all 0.4s var(--ease-bounce);
+            flex-shrink: 0;
+            background: transparent;
+        }
+        .result-card .action-btn:hover {
+            background: var(--sea);
+            border-color: var(--sea);
+            color: var(--white);
+            transform: scale(1.15) rotate(-8deg);
+            box-shadow: 0 8px 24px rgba(58, 122, 106, 0.15);
+        }
+
+        /* ===== ICON COLORS ===== */
+        .icon-medical {
+            color: #e74c3c;
+        }
+        .icon-medical-bg {
+            background: rgba(231, 76, 60, 0.06);
+        }
+        .result-card:hover .icon-medical-bg {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .icon-essential {
+            color: #f39c12;
+        }
+        .icon-essential-bg {
+            background: rgba(243, 156, 18, 0.06);
+        }
+        .result-card:hover .icon-essential-bg {
+            background: #f39c12;
+            color: white;
+        }
+
+        .icon-transport {
+            color: #3498db;
+        }
+        .icon-transport-bg {
+            background: rgba(52, 152, 219, 0.06);
+        }
+        .result-card:hover .icon-transport-bg {
+            background: #3498db;
+            color: white;
+        }
+
+        .icon-service {
+            color: #8e44ad;
+        }
+        .icon-service-bg {
+            background: rgba(142, 68, 173, 0.06);
+        }
+        .result-card:hover .icon-service-bg {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .icon-emergency {
+            color: #c0392b;
+        }
+        .icon-emergency-bg {
+            background: rgba(192, 57, 43, 0.06);
+        }
+        .result-card:hover .icon-emergency-bg {
+            background: #c0392b;
+            color: white;
+        }
+
+        .icon-entertainment {
+            color: #e67e22;
+        }
+        .icon-entertainment-bg {
+            background: rgba(230, 126, 34, 0.06);
+        }
+        .result-card:hover .icon-entertainment-bg {
+            background: #e67e22;
+            color: white;
+        }
+
+        /* ===== EMPTY STATE — PREMIUM ===== */
+        .empty-state {
+            text-align: center;
+            padding: 80px 40px;
+            grid-column: 1 / -1;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            border: 2px dashed var(--line);
+            transition: all 0.4s var(--ease);
+        }
+        .empty-state .icon-wrap {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: inline-block;
+            color: var(--muted);
+            animation: float-empty 4s ease-in-out infinite;
+        }
+        @keyframes float-empty {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-12px) scale(1.02);
+            }
+        }
+        .empty-state h3 {
+            font-family: var(--font-serif);
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .empty-state .search-term {
+            color: var(--terracotta);
+            font-weight: 700;
+            background: rgba(184, 90, 58, 0.04);
+            padding: 2px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 18px;
+            border: 1px solid rgba(184, 90, 58, 0.08);
+        }
+        .empty-state p {
+            color: var(--muted);
+            max-width: 440px;
+            margin: 14px auto 0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .empty-state .suggestions {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .empty-state .suggestions .chip {
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            border: 1.5px solid var(--line);
+            transition: all 0.3s var(--ease-bounce);
+            cursor: pointer;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .empty-state .suggestions .chip:hover {
+            border-color: var(--sea);
+            color: var(--sea);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow);
+        }
+        .empty-state .suggestions .chip i {
+            font-size: 14px;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--deep-2);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 56px 0 28px;
+        }
+        .footer .logo {
+            color: var(--white);
+        }
+        .footer .logo em {
+            color: var(--sunset);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 36px;
+            margin: 36px 0 40px;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .footer-grid h4 {
+            color: var(--white);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .footer-grid ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .footer-grid ul a {
+            transition: all 0.3s var(--ease);
+        }
+        .footer-grid ul a:hover {
+            color: var(--white);
+            transform: translateX(4px);
+        }
+        .footer-note {
+            font-size: 12px;
+            opacity: 0.4;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .nearby-hero {
+                padding: 120px 0 40px;
+            }
+            .nearby-hero h1 {
+                font-size: 32px;
+            }
+            .nearby-hero p {
+                font-size: 15px;
+            }
+            .quick-chips {
+                gap: 8px;
+            }
+            .quick-chip {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .quick-chip i {
+                font-size: 12px;
+            }
+            .result-card {
+                padding: 18px 20px;
+            }
+            .result-card .icon-wrap {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+            .category-tab {
+                font-size: 12px;
+                padding: 8px 16px;
+                gap: 6px;
+            }
+            .category-tab .count-badge {
+                display: none;
+            }
+            .results-header h2 {
+                font-size: 22px;
+            }
+            .results-header .count {
+                font-size: 12px;
+                padding: 2px 14px;
+            }
+            .empty-state {
+                padding: 50px 24px;
+            }
+            .empty-state h3 {
+                font-size: 22px;
+            }
+            .empty-state .search-term {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .result-card {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .result-card .distance {
+                font-size: 12px;
+                padding: 2px 12px;
+            }
+            .result-card .action-btn {
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAV ===== -->
+    <nav class="nav" id="siteNav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Xplore <em>Kapil</em></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Hidden Gems</a></li>
+                <li><a href="stays.html">Stays</a></li>
+                <li><a href="food.html" class="active">Food</a></li>
+                <li><a href="insider.html">Local Guide</a></li>
+                <li><a href="nearby.html">Nearby</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-sm" style="border:1.5px solid currentColor; border-radius:40px; padding:8px 20px; font-weight:600; font-size:12px;">List your place</a>
+                <button class="nav-menu-btn" id="menuOpen" aria-label="Open menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-head">
+            <span class="logo">Xplore <em>Kapil</em></span>
+            <button class="mobile-menu-close" id="menuClose">×</button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html">Home</a>
+            <a href="explore.html">Explore</a>
+            <a href="stays.html">Stays</a>
+            <a href="food.html">Food</a>
+            <a href="nearby.html">Nearby</a>
+            <a href="insider.html">Insider</a>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="nearby-hero" id="heroSection">
+        <div class="bg-glow">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container hero-content">
+            <span class="eyebrow on-dark"><i class="fas fa-location-dot" style="margin-right:6px;"></i> Explore Nearby</span>
+            <h1>Everything you need, <br/><span class="highlight">right around you</span></h1>
+            <p>Pharmacies, ATMs, bike rentals, hospitals, cinemas, and more — all mapped and ready for you. No more wandering around looking for essentials.</p>
+
+            <div class="quick-chips">
+                <button class="quick-chip" data-category="pharmacy"><i class="fas fa-prescription-bottle"></i> <span>Pharmacy</span></button>
+                <button class="quick-chip" data-category="atm"><i class="fas fa-money-bill-wave"></i> <span>ATM</span></button>
+                <button class="quick-chip" data-category="bike-rental"><i class="fas fa-motorcycle"></i> <span>Bike Rental</span></button>
+                <button class="quick-chip" data-category="hospital"><i class="fas fa-hospital"></i> <span>Hospital</span></button>
+                <button class="quick-chip" data-category="taxi"><i class="fas fa-taxi"></i> <span>Taxi</span></button>
+                <button class="quick-chip" data-category="cinema"><i class="fas fa-film"></i> <span>Cinema</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEARCH BAR ===== -->
+    <section class="search-section" id="searchSection">
+        <div class="container">
+            <div class="search-wrapper">
+                <span class="search-icon-wrap"><i class="fas fa-search"></i></span>
+                <input type="text" id="searchInput" placeholder="Search for pharmacy, ATM, bike rental, hospital, cinema, taxi..." autocomplete="off" />
+                <button class="search-btn" id="searchBtn"><span>Find Nearby <i class="fas fa-arrow-right"></i></span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORY TABS ===== -->
+    <section class="category-tabs-section">
+        <div class="container">
+            <div class="category-tabs" id="categoryTabs">
+                <button class="category-tab active" data-category="all">
+                    <i class="fas fa-th-large"></i> <span>All</span>
+                    <span class="count-badge" id="countAll">24</span>
+                </button>
+                <button class="category-tab" data-category="medical">
+                    <i class="fas fa-prescription-bottle"></i> <span>Medical</span>
+                    <span class="count-badge" id="countMedical">4</span>
+                </button>
+                <button class="category-tab" data-category="essentials">
+                    <i class="fas fa-money-bill-wave"></i> <span>Essentials</span>
+                    <span class="count-badge" id="countEssentials">4</span>
+                </button>
+                <button class="category-tab" data-category="transport">
+                    <i class="fas fa-motorcycle"></i> <span>Transport</span>
+                    <span class="count-badge" id="countTransport">4</span>
+                </button>
+                <button class="category-tab" data-category="services">
+                    <i class="fas fa-wrench"></i> <span>Services</span>
+                    <span class="count-badge" id="countServices">4</span>
+                </button>
+                <button class="category-tab" data-category="entertainment">
+                    <i class="fas fa-film"></i> <span>Entertainment</span>
+                    <span class="count-badge" id="countEntertainment">4</span>
+                </button>
+                <button class="category-tab" data-category="emergency">
+                    <i class="fas fa-phone-alt"></i> <span>Emergency</span>
+                    <span class="count-badge" id="countEmergency">4</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESULTS ===== -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-header">
+                <div class="left">
+                    <h2>📍 Nearby Places</h2>
+                    <span class="count"><span id="resultCount">24</span> places</span>
+                </div>
+            </div>
+            <div class="grid" id="resultsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <span class="logo">Xplore <em>Kapil</em></span>
+            <div class="footer-grid">
+                <div>
+                    <h4>About</h4>
+                    <p style="font-size:14px; max-width:280px; opacity:.85;">A digital local guide for the Kapil coast — built with local coordinators, for every kind of visitor.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="gems.html"><i class="fas fa-gem"></i> Hidden Gems</a></li>
+                        <li><a href="stays.html"><i class="fas fa-bed"></i> Stays</a></li>
+                        <li><a href="food.html"><i class="fas fa-utensils"></i> Food</a></li>
+                        <li><a href="nearby.html"><i class="fas fa-map-pin"></i> Nearby</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For businesses</h4>
+                    <ul><li><a href="#"><i class="fas fa-store"></i> List your place</a></li><li><a href="#"><i class="fas fa-user-plus"></i> Become a coordinator</a></li></ul>
+                </div>
+                <div>
+                    <h4>Coming soon</h4>
+                    <ul><li><i class="fas fa-map-pin"></i> Xplore Varkala</li><li><i class="fas fa-map-pin"></i> Xplore Kovalam</li></ul>
+                </div>
+            </div>
+            <p class="footer-note">Xplore Kapil is a prototype. Listings, tips and reviews shown are placeholder content for demonstration only.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== DATA =====
+            const NEARBY_DATA = [{
+                id: 1,
+                name: 'Kapil Pharmacy',
+                category: 'medical',
+                subcategory: 'pharmacy',
+                icon: 'fa-prescription-bottle',
+                iconColor: 'icon-medical',
+                iconBg: 'icon-medical-bg',
+                tagClass: 'medical-tag',
+                distance: '180 m',
+                location: 'Kapil market road',
+                hours: '8:00 AM - 10:00 PM',
+                phone: '+91 98765 43210'
+            }, {
+                id: 2,
+                name: 'Coastal Care Hospital',
+                category: 'medical',
+                subcategory: 'hospital',
+                icon: 'fa-hospital',
+                iconColor: 'icon-medical',
+                iconBg: 'icon-medical-bg',
+                tagClass: 'medical-tag',
+                distance: '1.2 km',
+                location: 'Kapil–Edava road',
+                hours: '24/7',
+                phone: '+91 98765 43211'
+            }, {
+                id: 3,
+                name: 'Kapil Dental Clinic',
+                category: 'medical',
+                subcategory: 'clinic',
+                icon: 'fa-tooth',
+                iconColor: 'icon-medical',
+                iconBg: 'icon-medical-bg',
+                tagClass: 'medical-tag',
+                distance: '850 m',
+                location: 'Kapil main road',
+                hours: '10:00 AM - 6:00 PM',
+                phone: '+91 98765 43218'
+            }, {
+                id: 4,
+                name: 'Dr. Nair\'s Medical Center',
+                category: 'medical',
+                subcategory: 'clinic',
+                icon: 'fa-stethoscope',
+                iconColor: 'icon-medical',
+                iconBg: 'icon-medical-bg',
+                tagClass: 'medical-tag',
+                distance: '750 m',
+                location: 'Kapil beach road',
+                hours: '9:00 AM - 7:00 PM',
+                phone: '+91 98765 43219'
+            }, {
+                id: 5,
+                name: 'SBI ATM — Kapil Junction',
+                category: 'essentials',
+                subcategory: 'atm',
+                icon: 'fa-money-bill-wave',
+                iconColor: 'icon-essential',
+                iconBg: 'icon-essential-bg',
+                tagClass: 'essential-tag',
+                distance: '350 m',
+                location: 'Kapil main road',
+                hours: '24/7',
+                phone: null
+            }, {
+                id: 6,
+                name: 'Sunrise Supermarket',
+                category: 'essentials',
+                subcategory: 'grocery',
+                icon: 'fa-basket-shopping',
+                iconColor: 'icon-essential',
+                iconBg: 'icon-essential-bg',
+                tagClass: 'essential-tag',
+                distance: '500 m',
+                location: 'Kapil village centre',
+                hours: '8:00 AM - 9:00 PM',
+                phone: null
+            }, {
+                id: 7,
+                name: 'Federal Bank ATM',
+                category: 'essentials',
+                subcategory: 'atm',
+                icon: 'fa-building-columns',
+                iconColor: 'icon-essential',
+                iconBg: 'icon-essential-bg',
+                tagClass: 'essential-tag',
+                distance: '620 m',
+                location: 'Kapil–Edava road',
+                hours: '24/7',
+                phone: null
+            }, {
+                id: 8,
+                name: 'Fresh Mart Grocery',
+                category: 'essentials',
+                subcategory: 'grocery',
+                icon: 'fa-cart-shopping',
+                iconColor: 'icon-essential',
+                iconBg: 'icon-essential-bg',
+                tagClass: 'essential-tag',
+                distance: '920 m',
+                location: 'Kapil beach road',
+                hours: '7:00 AM - 10:00 PM',
+                phone: '+91 98765 43220'
+            }, {
+                id: 9,
+                name: 'Rajan\'s Bike Rentals',
+                category: 'transport',
+                subcategory: 'bike-rental',
+                icon: 'fa-motorcycle',
+                iconColor: 'icon-transport',
+                iconBg: 'icon-transport-bg',
+                tagClass: 'transport-tag',
+                distance: '250 m',
+                location: 'Kapil main road',
+                hours: '7:00 AM - 9:00 PM',
+                phone: '+91 98765 43212'
+            }, {
+                id: 10,
+                name: 'Kapil Taxi Service',
+                category: 'transport',
+                subcategory: 'taxi',
+                icon: 'fa-taxi',
+                iconColor: 'icon-transport',
+                iconBg: 'icon-transport-bg',
+                tagClass: 'transport-tag',
+                distance: '400 m',
+                location: 'Near Kapil bridge',
+                hours: '24/7',
+                phone: '+91 98765 43213'
+            }, {
+                id: 11,
+                name: 'Indian Oil Petrol Pump',
+                category: 'transport',
+                subcategory: 'petrol',
+                icon: 'fa-gas-pump',
+                iconColor: 'icon-transport',
+                iconBg: 'icon-transport-bg',
+                tagClass: 'transport-tag',
+                distance: '800 m',
+                location: 'Kapil–Edava road',
+                hours: '6:00 AM - 11:00 PM',
+                phone: null
+            }, {
+                id: 12,
+                name: 'Kapil Bus Stand',
+                category: 'transport',
+                subcategory: 'bus',
+                icon: 'fa-bus',
+                iconColor: 'icon-transport',
+                iconBg: 'icon-transport-bg',
+                tagClass: 'transport-tag',
+                distance: '1.1 km',
+                location: 'Kapil junction',
+                hours: '5:00 AM - 10:00 PM',
+                phone: null
+            }, {
+                id: 13,
+                name: 'Kapil Laundry Service',
+                category: 'services',
+                subcategory: 'laundry',
+                icon: 'fa-shirt',
+                iconColor: 'icon-service',
+                iconBg: 'icon-service-bg',
+                tagClass: 'service-tag',
+                distance: '600 m',
+                location: 'Kapil market lane',
+                hours: '8:00 AM - 6:00 PM',
+                phone: '+91 98765 43216'
+            }, {
+                id: 14,
+                name: 'Bakery & Fresh Bread',
+                category: 'services',
+                subcategory: 'bakery',
+                icon: 'fa-bread-slice',
+                iconColor: 'icon-service',
+                iconBg: 'icon-service-bg',
+                tagClass: 'service-tag',
+                distance: '550 m',
+                location: 'Kapil village centre',
+                hours: '6:00 AM - 8:00 PM',
+                phone: null
+            }, {
+                id: 15,
+                name: 'Kapil Internet Café',
+                category: 'services',
+                subcategory: 'internet',
+                icon: 'fa-wifi',
+                iconColor: 'icon-service',
+                iconBg: 'icon-service-bg',
+                tagClass: 'service-tag',
+                distance: '400 m',
+                location: 'Kapil main road',
+                hours: '9:00 AM - 10:00 PM',
+                phone: null
+            }, {
+                id: 16,
+                name: 'Photo & Print Studio',
+                category: 'services',
+                subcategory: 'photo',
+                icon: 'fa-camera',
+                iconColor: 'icon-service',
+                iconBg: 'icon-service-bg',
+                tagClass: 'service-tag',
+                distance: '480 m',
+                location: 'Kapil market road',
+                hours: '10:00 AM - 7:00 PM',
+                phone: '+91 98765 43221'
+            }, {
+                id: 17,
+                name: 'Kapil Cinema',
+                category: 'entertainment',
+                subcategory: 'cinema',
+                icon: 'fa-film',
+                iconColor: 'icon-entertainment',
+                iconBg: 'icon-entertainment-bg',
+                tagClass: 'entertainment-tag',
+                distance: '900 m',
+                location: 'Kapil main road',
+                hours: '10:00 AM - 11:00 PM',
+                phone: '+91 98765 43222'
+            }, {
+                id: 18,
+                name: 'Beach Amphitheatre — Live Music',
+                category: 'entertainment',
+                subcategory: 'live-music',
+                icon: 'fa-music',
+                iconColor: 'icon-entertainment',
+                iconBg: 'icon-entertainment-bg',
+                tagClass: 'entertainment-tag',
+                distance: '600 m',
+                location: 'Kapil beachfront',
+                hours: '6:00 PM - 9:00 PM (Sat)',
+                phone: null
+            }, {
+                id: 19,
+                name: 'Coconut Grove Resort — Movie Night',
+                category: 'entertainment',
+                subcategory: 'outdoor-movie',
+                icon: 'fa-display',
+                iconColor: 'icon-entertainment',
+                iconBg: 'icon-entertainment-bg',
+                tagClass: 'entertainment-tag',
+                distance: '1.4 km',
+                location: 'Edava, 3 km from Kapil',
+                hours: '8:00 PM (Fri & Sat)',
+                phone: '+91 98765 43223'
+            }, {
+                id: 20,
+                name: 'Kapil Cultural Center — Art Exhibitions',
+                category: 'entertainment',
+                subcategory: 'art',
+                icon: 'fa-palette',
+                iconColor: 'icon-entertainment',
+                iconBg: 'icon-entertainment-bg',
+                tagClass: 'entertainment-tag',
+                distance: '750 m',
+                location: 'Kapil village centre',
+                hours: '11:00 AM - 6:00 PM',
+                phone: '+91 98765 43224'
+            }, {
+                id: 21,
+                name: 'Kapil Police Station',
+                category: 'emergency',
+                subcategory: 'police',
+                icon: 'fa-shield-halved',
+                iconColor: 'icon-emergency',
+                iconBg: 'icon-emergency-bg',
+                tagClass: 'emergency-tag',
+                distance: '600 m',
+                location: 'Kapil beach road',
+                hours: '24/7',
+                phone: '+91 100'
+            }, {
+                id: 22,
+                name: 'Emergency Helpline',
+                category: 'emergency',
+                subcategory: 'helpline',
+                icon: 'fa-phone-alt',
+                iconColor: 'icon-emergency',
+                iconBg: 'icon-emergency-bg',
+                tagClass: 'emergency-tag',
+                distance: '—',
+                location: 'Emergency Contacts',
+                hours: '24/7',
+                phone: '112'
+            }, {
+                id: 23,
+                name: 'Coastal Fire Station',
+                category: 'emergency',
+                subcategory: 'fire-station',
+                icon: 'fa-fire-extinguisher',
+                iconColor: 'icon-emergency',
+                iconBg: 'icon-emergency-bg',
+                tagClass: 'emergency-tag',
+                distance: '2.1 km',
+                location: 'Kapil–Edava road',
+                hours: '24/7',
+                phone: '+91 101'
+            }, {
+                id: 24,
+                name: 'Coast Guard Rescue Post',
+                category: 'emergency',
+                subcategory: 'rescue',
+                icon: 'fa-life-ring',
+                iconColor: 'icon-emergency',
+                iconBg: 'icon-emergency-bg',
+                tagClass: 'emergency-tag',
+                distance: '950 m',
+                location: 'Kapil beachfront',
+                hours: '24/7',
+                phone: '+91 98765 43225'
+            }];
+
+            // ===== STATE =====
+            let currentCategory = 'all';
+            let currentSearch = '';
+
+            // ===== DOM REFS =====
+            const grid = document.getElementById('resultsGrid');
+            const resultCount = document.getElementById('resultCount');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+
+            // ===== CATEGORY COUNTS =====
+            const categoryCounts = {
+                all: NEARBY_DATA.length,
+                medical: NEARBY_DATA.filter(d => d.category === 'medical').length,
+                essentials: NEARBY_DATA.filter(d => d.category === 'essentials').length,
+                transport: NEARBY_DATA.filter(d => d.category === 'transport').length,
+                services: NEARBY_DATA.filter(d => d.category === 'services').length,
+                entertainment: NEARBY_DATA.filter(d => d.category === 'entertainment').length,
+                emergency: NEARBY_DATA.filter(d => d.category === 'emergency').length,
+            };
+
+            // Update count badges
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                const cat = tab.dataset.category;
+                const badge = tab.querySelector('.count-badge');
+                if (badge) badge.textContent = categoryCounts[cat] || 0;
+            });
+
+            // ===== HELPERS =====
+            function getFilteredData() {
+                let filtered = [...NEARBY_DATA];
+
+                if (currentCategory !== 'all') {
+                    filtered = filtered.filter(item => item.category === currentCategory);
+                }
+
+                if (currentSearch.trim()) {
+                    const query = currentSearch.toLowerCase().trim();
+                    filtered = filtered.filter(item =>
+                        item.name.toLowerCase().includes(query) ||
+                        item.location.toLowerCase().includes(query) ||
+                        item.subcategory.toLowerCase().includes(query) ||
+                        item.category.toLowerCase().includes(query)
+                    );
+                }
+
+                return filtered;
+            }
+
+            function renderResults() {
+                const filtered = getFilteredData();
+                resultCount.textContent = filtered.length;
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state reveal">
+                            <div class="icon-wrap">🔍</div>
+                            <h3>No results found</h3>
+                            <div class="search-term">"${currentSearch || 'this category'}"</div>
+                            <p>We couldn't find any places matching your search. Try adjusting your search or explore the categories below.</p>
+                            <div class="suggestions">
+                                <button class="chip" onclick="quickSearch('pharmacy')"><i class="fas fa-prescription-bottle"></i> Pharmacy</button>
+                                <button class="chip" onclick="quickSearch('atm')"><i class="fas fa-money-bill-wave"></i> ATM</button>
+                                <button class="chip" onclick="quickSearch('bike rental')"><i class="fas fa-motorcycle"></i> Bike Rental</button>
+                                <button class="chip" onclick="quickSearch('hospital')"><i class="fas fa-hospital"></i> Hospital</button>
+                                <button class="chip" onclick="quickSearch('cinema')"><i class="fas fa-film"></i> Cinema</button>
+                                <button class="chip" onclick="quickSearch('taxi')"><i class="fas fa-taxi"></i> Taxi</button>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = filtered.map((item, index) => `
+                    <div class="result-card reveal-scale" style="transition-delay: ${index * 0.03}s">
+                        <div class="icon-wrap ${item.iconBg} ${item.iconColor}">
+                            <i class="fas ${item.icon}"></i>
+                        </div>
+                        <div class="info">
+                            <h3>${item.name}</h3>
+                            <div class="meta">
+                                <span><i class="fas fa-map-pin"></i> ${item.location}</span>
+                                ${item.distance !== '—' ? `<span><i class="fas fa-route"></i> ${item.distance}</span>` : ''}
+                                ${item.phone ? `<span><i class="fas fa-phone"></i> ${item.phone}</span>` : ''}
+                                <span class="tag ${item.tagClass}">${item.subcategory}</span>
+                            </div>
+                        </div>
+                        <div class="distance">${item.distance !== '—' ? item.distance : ''}</div>
+                        <button class="action-btn" title="Get Directions" onclick="alert('Opening directions for ${item.name}...')">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `).join('');
+
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('.reveal-scale').forEach(el => {
+                        el.classList.add('is-visible');
+                    });
+                });
+            }
+
+            function filterByCategory(category) {
+                currentCategory = category;
+                renderResults();
+                document.querySelectorAll('.category-tab').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.category === category);
+                });
+                document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function quickSearch(term) {
+                searchInput.value = term;
+                currentSearch = term;
+                renderResults();
+                document.querySelector('.results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // ===== EVENT LISTENERS =====
+
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    filterByCategory(this.dataset.category);
+                });
+            });
+
+            document.querySelectorAll('.quick-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    document.querySelectorAll('.category-tab').forEach(tab => {
+                        if (tab.dataset.category === category) {
+                            tab.click();
+                        }
+                    });
+                });
+            });
+
+            function performSearch() {
+                currentSearch = searchInput.value;
+                renderResults();
+            }
+
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            // ===== NAVIGATION =====
+            const nav = document.getElementById('siteNav');
+            const searchSection = document.getElementById('searchSection');
+
+            window.addEventListener('scroll', function() {
+                nav.classList.toggle('scrolled', window.scrollY > 20);
+                searchSection.classList.toggle('scrolled', window.scrollY > 200);
+            });
+
+            // ===== MOBILE MENU =====
+            const menu = document.getElementById('mobileMenu');
+            document.getElementById('menuOpen')?.addEventListener('click', () => {
+                menu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            document.getElementById('menuClose')?.addEventListener('click', () => {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+            menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
+            }));
+
+            // ===== SCROLL REVEAL =====
+            const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ===== EXPOSE GLOBALLY =====
+            window.filterByCategory = filterByCategory;
+            window.quickSearch = quickSearch;
+
+            // ===== INIT =====
+            renderResults();
+
+        })();
+    </script>
+
+</body>
+</html>

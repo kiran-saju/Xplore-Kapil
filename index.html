@@ -6,24 +6,1754 @@
 <title>Xplore Kapil — Digital Local Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+/* ============================================================
+   XPLORE KAPIL — ULTRA-PREMIUM HOMEPAGE (FINAL)
+   ============================================================ */
+
+:root {
+  --ink: #1a2a24;
+  --deep: #1a3a30;
+  --deep-2: #0f2a22;
+  --ivory: #f7f4ea;
+  --sand: #e8ddc8;
+  --line: #d6cab8;
+  --terracotta: #b85a3a;
+  --sunset: #dd8a5a;
+  --sea: #3a7a6a;
+  --white: #ffffff;
+  --muted: #5a6a62;
+  --gold: #c9a84c;
+  --shadow: 0 8px 40px rgba(18, 38, 30, 0.12);
+  --shadow-lg: 0 24px 64px rgba(18, 38, 30, 0.18);
+  --shadow-xl: 0 40px 80px rgba(18, 38, 30, 0.25);
+  --radius: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --container: 1280px;
+  --font-serif: 'Fraunces', serif;
+  --font-sans: 'Inter', sans-serif;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; padding: 0; margin: 0; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+:focus-visible { outline: 2.5px solid var(--terracotta); outline-offset: 3px; }
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 40px; }
+@media (max-width: 768px) { .container { padding: 0 20px; } }
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.96);
+  transition: all 1s var(--ease);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.7) rotate(-2deg);
+  transition: all 1.2s var(--ease-bounce);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* ===== 3D ANIMATIONS ===== */
+.tilt-3d {
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+  transition: transform 0.6s var(--ease);
+}
+.tilt-3d:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(4deg) scale(1.02);
+}
+
+/* ===== UTILITIES ===== */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+.eyebrow.on-dark { color: var(--sunset); }
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--sea);
+  background: rgba(58, 122, 106, 0.08);
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  background: var(--sea);
+  padding: 2px 10px 2px 6px;
+  border-radius: 20px;
+  animation: pulse-badge 2s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.badge-verified svg { width: 10px; height: 10px; fill: currentColor; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 40px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 14px;
+  border: 2px solid transparent;
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease);
+}
+.btn:hover::after { transform: translateX(0); }
+
+.btn-primary {
+  background: var(--deep);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background: var(--deep-2);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(26, 58, 48, 0.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--deep);
+  border-color: var(--line);
+}
+.btn-outline:hover {
+  border-color: var(--deep);
+  background: var(--deep);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.btn-sm { padding: 10px 22px; font-size: 12px; }
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 18px 0;
+  transition: all 0.4s ease;
+}
+.nav--overlay {
+  background: transparent;
+  color: var(--white);
+}
+.nav--solid {
+  background: rgba(247, 244, 234, 0.94);
+  backdrop-filter: blur(20px);
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+.nav-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 768px) { .nav-inner { padding: 0 20px; } }
+
+.logo {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  transition: transform 0.3s var(--ease);
+}
+.logo:hover { transform: scale(1.03); }
+.logo em { font-style: normal; color: var(--terracotta); }
+.nav--overlay .logo em { color: var(--sunset); }
+
+.nav-links { display: flex; gap: 34px; font-size: 13.5px; font-weight: 600; }
+.nav-links a {
+  opacity: 0.85;
+  transition: all 0.3s var(--ease);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transition: right 0.3s var(--ease);
+}
+.nav-links a:hover { opacity: 1; }
+.nav-links a:hover::after { right: 0; }
+
+.nav-actions { display: flex; align-items: center; gap: 16px; }
+.nav-menu-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  background: transparent;
+  font-size: 18px;
+  transition: transform 0.3s var(--ease);
+}
+.nav-menu-btn:hover { transform: rotate(90deg); }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: flex; }
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--deep-2);
+  padding: 32px 28px;
+  transform: translateY(-100%);
+  transition: transform 0.6s var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mobile-menu .logo { color: var(--white); }
+.mobile-menu .logo em { color: var(--sunset); }
+.mobile-menu-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s var(--ease);
+}
+.mobile-menu-close:hover { transform: rotate(90deg); }
+.mobile-menu-links {
+  margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.mobile-menu-links a {
+  color: var(--white);
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: all 0.3s var(--ease);
+  transform: translateX(-20px);
+}
+.mobile-menu-links a:hover {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--sunset);
+}
+.mobile-menu-links a:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu-links a:nth-child(2) { transition-delay: 0.10s; }
+.mobile-menu-links a:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu-links a:nth-child(4) { transition-delay: 0.20s; }
+.mobile-menu-links a:nth-child(5) { transition-delay: 0.25s; }
+
+/* ============================================================
+   HERO — CINEMATIC EDITION (PERFECT & FINAL)
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  color: var(--white);
+}
+.hero-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 30s ease-in-out infinite alternate;
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 30s ease-in-out infinite alternate;
+}
+@keyframes hero-zoom {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.12); }
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(221, 138, 90, 0.10), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(58, 122, 106, 0.08), transparent 50%),
+    linear-gradient(180deg, 
+      rgba(10, 26, 21, 0.4) 0%, 
+      rgba(15, 42, 34, 0.6) 40%, 
+      rgba(15, 42, 34, 0.88) 100%
+    );
+}
+.hero-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-orbs .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.3;
+  animation: orb-float 20s ease-in-out infinite alternate;
+}
+.hero-orbs .orb:nth-child(1) {
+  top: 10%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(221, 138, 90, 0.3), transparent 70%);
+  animation-duration: 18s;
+}
+.hero-orbs .orb:nth-child(2) {
+  bottom: 20%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(58, 122, 106, 0.25), transparent 70%);
+  animation-duration: 22s;
+  animation-delay: 3s;
+}
+.hero-orbs .orb:nth-child(3) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(184, 90, 58, 0.15), transparent 70%);
+  animation-duration: 25s;
+  animation-delay: 5s;
+}
+@keyframes orb-float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, -30px) scale(1.2); }
+}
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-particles .p {
+  position: absolute;
+  border-radius: 50%;
+  animation: float-particle 25s infinite linear;
+}
+.hero-particles .p:nth-child(1) { top: 10%; left: 80%; width: 10px; height: 10px; background: rgba(221, 138, 90, 0.15); animation-duration: 18s; }
+.hero-particles .p:nth-child(2) { top: 25%; left: 90%; width: 6px; height: 6px; background: rgba(255, 255, 255, 0.08); animation-duration: 22s; }
+.hero-particles .p:nth-child(3) { top: 55%; left: 85%; width: 14px; height: 14px; background: rgba(58, 122, 106, 0.12); animation-duration: 20s; }
+.hero-particles .p:nth-child(4) { top: 75%; left: 70%; width: 8px; height: 8px; background: rgba(221, 138, 90, 0.10); animation-duration: 16s; }
+.hero-particles .p:nth-child(5) { top: 15%; left: 60%; width: 5px; height: 5px; background: rgba(255, 255, 255, 0.06); animation-duration: 25s; }
+.hero-particles .p:nth-child(6) { top: 45%; left: 95%; width: 12px; height: 12px; background: rgba(184, 90, 58, 0.08); animation-duration: 19s; }
+.hero-particles .p:nth-child(7) { top: 65%; left: 55%; width: 7px; height: 7px; background: rgba(255, 255, 255, 0.05); animation-duration: 21s; }
+.hero-particles .p:nth-child(8) { top: 85%; left: 85%; width: 9px; height: 9px; background: rgba(58, 122, 106, 0.08); animation-duration: 24s; }
+@keyframes float-particle {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-100vh) translateX(100px) rotate(720deg); opacity: 0; }
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 0 100px;
+  max-width: 720px;
+}
+.hero-content .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+  border-radius: 30px;
+  background: rgba(221, 138, 90, 0.12);
+  border: 1px solid rgba(221, 138, 90, 0.2);
+  backdrop-filter: blur(8px);
+  color: var(--sunset);
+  margin-bottom: 16px;
+}
+.hero-content h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(44px, 8vw, 84px);
+  color: var(--white);
+  margin: 16px 0 20px;
+  line-height: 1.04;
+  text-shadow: 0 4px 40px rgba(0, 0, 0, 0.4), 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+.hero-content h1 .highlight {
+  background: linear-gradient(135deg, #dd8a5a, #c9a84c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(221, 138, 90, 0.2);
+}
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+.hero-content .lead {
+  font-size: 18px;
+  opacity: 0.85;
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+.hero-search { max-width: 480px; }
+.hero-search-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 60px;
+  padding: 6px 6px 6px 24px;
+  transition: all 0.5s var(--ease);
+}
+.hero-search-row:focus-within {
+  border-color: rgba(221, 138, 90, 0.4);
+  box-shadow: 0 0 60px rgba(221, 138, 90, 0.06);
+  transform: scale(1.02);
+}
+.hero-search-row svg {
+  flex: none;
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease);
+}
+.hero-search-row:focus-within svg { opacity: 1; color: var(--sunset); }
+.hero-search-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 16px;
+  font-family: var(--font-sans);
+  padding: 12px 0;
+}
+.hero-search-row input::placeholder { color: rgba(255, 255, 255, 0.4); }
+.hero-search-row button {
+  background: linear-gradient(135deg, var(--terracotta), var(--sunset));
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 13px;
+  transition: all 0.3s var(--ease);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+.hero-search-row button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--sunset), var(--terracotta));
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.hero-search-row button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px rgba(221, 138, 90, 0.3);
+}
+.hero-search-row button:hover::before { opacity: 1; }
+.hero-search-row button span { position: relative; z-index: 1; }
+.scroll-cue {
+  position: absolute;
+  z-index: 2;
+  left: 40px;
+  bottom: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  animation: bounce-scroll 2.5s ease-in-out infinite;
+}
+.scroll-cue .line {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-cue .line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--sunset);
+  animation: scrollLine 2.5s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0% { top: -100%; }
+  60% { top: 100%; }
+  100% { top: 100%; }
+}
+@keyframes bounce-scroll {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+@media (max-width: 768px) { .scroll-cue { display: none; } }
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+section { padding: 100px 0; }
+@media (max-width: 768px) { section { padding: 64px 0; } }
+
+.section-head { max-width: 620px; margin-bottom: 44px; }
+.section-head h2 { margin-top: 10px; font-size: clamp(30px, 3.6vw, 46px); }
+.section-head p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 16px;
+}
+.section-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+/* ============================================================
+   DISCOVER STRIP — PREMIUM
+   ============================================================ */
+.discover-strip {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  scrollbar-width: none;
+  padding: 0;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+.discover-strip::-webkit-scrollbar { display: none; }
+
+.discover-item {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 16px;
+  border-right: 1px solid var(--line);
+  transition: all 0.4s var(--ease);
+  min-width: 0;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+.discover-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--deep), var(--sea));
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.discover-item:hover::before { opacity: 0.05; }
+.discover-item:last-child { border-right: none; }
+.discover-item:hover { transform: translateY(-2px); }
+.discover-item img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s var(--ease);
+}
+.discover-item:hover img { border-color: var(--terracotta); }
+.discover-item .d-num {
+  font-size: 10px;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 1px;
+  font-weight: 600;
+}
+.discover-item .d-label {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+}
+.discover-item span { position: relative; z-index: 1; }
+
+@media (max-width: 768px) {
+  .discover-strip {
+    padding: 0 16px;
+    gap: 8px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    background: transparent;
+    backdrop-filter: none;
+  }
+  .discover-item {
+    flex: 0 0 auto;
+    padding: 14px 20px;
+    border-right: 1px solid var(--line);
+  }
+  .discover-item:last-child { border-right: none; }
+  .discover-item img { width: 32px; height: 32px; }
+  .discover-item .d-label { font-size: 14px; }
+}
+
+/* ============================================================
+   STORY — CINEMATIC
+   ============================================================ */
+.story {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 900px) { .story { grid-template-columns: 1fr; gap: 36px; } }
+.story-media {
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+.story-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.story-media:hover img { transform: scale(1.03); }
+.story-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(15, 42, 34, 0.1));
+  pointer-events: none;
+}
+.story-copy p {
+  color: var(--muted);
+  font-size: 16px;
+  margin-top: 16px;
+}
+.story-copy p:first-of-type { margin-top: 20px; }
+.story-list {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 0;
+  font-family: var(--font-serif);
+  font-size: 18px;
+}
+.story-list li:not(:last-child)::after {
+  content: '—';
+  margin: 0 14px;
+  color: var(--line);
+  font-family: var(--font-sans);
+}
+
+/* ============================================================
+   FEATURE SPLIT
+   ============================================================ */
+.feature-split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.feature-split.reverse { grid-template-columns: 1fr 1.4fr; }
+.feature-split.reverse .feature-hero { order: 2; }
+@media (max-width: 900px) {
+  .feature-split, .feature-split.reverse { grid-template-columns: 1fr; }
+  .feature-split.reverse .feature-hero { order: 0; }
+}
+
+.feature-hero {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 380px;
+  box-shadow: var(--shadow);
+  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+}
+.feature-hero:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: var(--shadow-xl);
+}
+.feature-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.feature-hero:hover img { transform: scale(1.05); }
+.feature-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(15, 42, 34, 0.85));
+}
+.feature-copy {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 24px;
+  z-index: 2;
+  color: var(--white);
+}
+.feature-copy .eyebrow { color: var(--sunset); }
+.feature-copy h3 {
+  color: var(--white);
+  font-size: 24px;
+  margin: 6px 0 4px;
+}
+.feature-copy .meta-row {
+  display: flex;
+  gap: 14px;
+  font-size: 13px;
+  opacity: 0.9;
+  flex-wrap: wrap;
+}
+
+.feature-list { display: flex; flex-direction: column; }
+.feature-row {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  transition: transform 0.3s var(--ease), padding-left 0.3s var(--ease);
+}
+.feature-row:hover {
+  transform: translateX(4px);
+  padding-left: 4px;
+}
+.feature-list > a:first-child .feature-row { padding-top: 0; }
+.feature-row img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex: none;
+}
+.feature-row-copy h3 { font-size: 16px; }
+.feature-row-copy .meta {
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.feature-row-copy .price {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 6px;
+  color: var(--sea);
+}
+
+/* ============================================================
+   LOCAL GUIDE (Hidden Gems) — PREMIUM
+   ============================================================ */
+.local-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1024px) { .local-guide-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .local-guide-grid { grid-template-columns: 1fr; } }
+
+.local-guide-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition: all 0.5s var(--ease-bounce);
+  cursor: pointer;
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+}
+.local-guide-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(4deg) translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--sea);
+}
+.local-guide-card .media {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.local-guide-card .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.local-guide-card:hover .media img { transform: scale(1.06); }
+.local-guide-card .body {
+  padding: 20px 22px 22px;
+}
+.local-guide-card .body .tag-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--terracotta);
+}
+.local-guide-card .body h3 {
+  font-size: 17px;
+  font-family: var(--font-serif);
+  margin: 4px 0 6px;
+}
+.local-guide-card .body p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================================
+   NEARBY — NEW DESIGN
+   ============================================================ */
+.quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.quick-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  transition: all 0.3s var(--ease-bounce);
+  cursor: pointer;
+  min-width: 90px;
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-chip:hover {
+  transform: translateY(-4px);
+  border-color: var(--sea);
+  box-shadow: var(--shadow);
+}
+
+.quick-chip .chip-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.quick-chip .chip-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.quick-chip.active {
+  border-color: var(--sea);
+  background: rgba(58, 122, 106, 0.04);
+  box-shadow: 0 8px 24px rgba(58, 122, 106, 0.08);
+}
+
+.nearby-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.nearby-pill {
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  transition: all 0.3s var(--ease-bounce);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.nearby-pill:hover {
+  border-color: var(--sea);
+  color: var(--sea);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.nearby-pill.active {
+  background: var(--deep);
+  color: var(--white);
+  border-color: var(--deep);
+  box-shadow: 0 8px 24px rgba(26, 58, 48, 0.15);
+}
+
+.nearby-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .nearby-grid { grid-template-columns: 1fr; }
+}
+
+.nearby-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  border: 1px solid var(--line);
+  transition: all 0.4s var(--ease-bounce);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.nearby-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--sea);
+}
+
+.nearby-card .nc-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: all 0.4s var(--ease);
+}
+
+.nearby-card:hover .nc-icon {
+  transform: scale(1.05) rotate(-5deg);
+}
+
+.nearby-card .nc-icon.medical { background: rgba(231, 76, 60, 0.08); color: #e74c3c; }
+.nearby-card:hover .nc-icon.medical { background: #e74c3c; color: white; }
+.nearby-card .nc-icon.essential { background: rgba(243, 156, 18, 0.08); color: #f39c12; }
+.nearby-card:hover .nc-icon.essential { background: #f39c12; color: white; }
+.nearby-card .nc-icon.transport { background: rgba(52, 152, 219, 0.08); color: #3498db; }
+.nearby-card:hover .nc-icon.transport { background: #3498db; color: white; }
+.nearby-card .nc-icon.service { background: rgba(142, 68, 173, 0.08); color: #8e44ad; }
+.nearby-card:hover .nc-icon.service { background: #8e44ad; color: white; }
+.nearby-card .nc-icon.entertainment { background: rgba(230, 126, 34, 0.08); color: #e67e22; }
+.nearby-card:hover .nc-icon.entertainment { background: #e67e22; color: white; }
+
+.nearby-card .nc-info { flex: 1; min-width: 0; }
+.nearby-card .nc-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+.nearby-card .nc-info p { font-size: 13px; color: var(--muted); margin: 0; }
+.nearby-card .nc-info .nc-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--sea);
+  background: rgba(58, 122, 106, 0.06);
+  padding: 1px 12px;
+  border-radius: 20px;
+  margin-top: 3px;
+}
+.nearby-card .nc-info .nc-tag.emergency { color: #c0392b; background: rgba(192, 57, 43, 0.06); }
+
+.nearby-card .nc-dist {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sea);
+  background: rgba(58, 122, 106, 0.04);
+  padding: 4px 16px;
+  border-radius: 30px;
+  white-space: nowrap;
+  transition: all 0.3s var(--ease);
+}
+
+.nearby-card:hover .nc-dist {
+  background: var(--sea);
+  color: var(--white);
+}
+
+/* ============================================================
+   TRIP PLANNER — AI DEMO
+   ============================================================ */
+.planner { background: var(--sand); }
+
+.trip-builder {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 40px 48px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+@media (max-width: 768px) {
+  .trip-builder { padding: 28px 24px; }
+}
+
+.trip-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.trip-row:last-of-type { border-bottom: none; }
+
+.trip-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 80px;
+}
+
+.trip-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1;
+}
+
+.trip-opt {
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  border: 1.5px solid var(--line);
+  transition: all 0.3s var(--ease-bounce);
+  background: var(--white);
+  cursor: pointer;
+}
+
+.trip-opt:hover {
+  border-color: var(--sea);
+  color: var(--sea);
+  transform: translateY(-2px);
+}
+
+.trip-opt.active {
+  background: var(--deep);
+  color: var(--white);
+  border-color: var(--deep);
+  box-shadow: 0 4px 16px rgba(26, 58, 48, 0.12);
+}
+
+.trip-generate {
+  width: 100%;
+  padding: 16px;
+  border-radius: 60px;
+  background: linear-gradient(135deg, var(--deep), var(--sea));
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  transition: all 0.3s var(--ease-bounce);
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.trip-generate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--sea), var(--deep));
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.trip-generate:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 12px 40px rgba(58, 122, 106, 0.2);
+}
+
+.trip-generate:hover::before { opacity: 1; }
+.trip-generate span, .trip-generate i { position: relative; z-index: 1; }
+
+.trip-generate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* AI Loading */
+.ai-loading {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  margin-bottom: 40px;
+}
+
+.ai-thinking {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.ai-brain {
+  font-size: 48px;
+  color: var(--sea);
+  animation: brain-pulse 1.5s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes brain-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.ai-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(58, 122, 106, 0.1);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+.ai-pulse-ring:nth-child(2) { animation-delay: 0.5s; }
+.ai-pulse-ring:nth-child(3) { animation-delay: 1s; }
+
+@keyframes pulse-ring {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+}
+
+.ai-status {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.ai-dots {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--sea);
+  letter-spacing: 4px;
+}
+
+.ai-dots span {
+  animation: dot-bounce 1.4s infinite;
+  display: inline-block;
+}
+
+.ai-dots span:nth-child(1) { animation-delay: 0s; }
+.ai-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ai-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+}
+
+.ai-progress {
+  max-width: 400px;
+  margin: 0 auto;
+  height: 4px;
+  background: var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ai-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--sea), var(--sunset));
+  border-radius: 4px;
+  transition: width 0.3s var(--ease);
+}
+
+/* Generated Itinerary */
+.itinerary {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 40px 48px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  animation: slide-up 0.6s var(--ease-bounce);
+}
+
+@keyframes slide-up {
+  0% { opacity: 0; transform: translateY(30px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 768px) {
+  .itinerary { padding: 28px 24px; }
+}
+
+.itinerary-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.itinerary-badge {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: 30px;
+  background: rgba(221, 138, 90, 0.08);
+  color: var(--sunset);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.itinerary-header h3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.itinerary-header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.itinerary-days {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+@media (max-width: 768px) {
+  .itinerary-days { grid-template-columns: 1fr; gap: 32px; }
+}
+
+.itinerary-day {
+  position: relative;
+  padding: 20px 24px;
+  background: var(--ivory);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+}
+
+.day-marker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.day-num {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--terracotta);
+  line-height: 1;
+}
+
+.day-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.day-stops { padding-left: 4px; }
+
+.day-stop {
+  position: relative;
+  padding: 0 0 16px 20px;
+  border-left: 2px solid var(--line);
+}
+.day-stop:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+
+.day-stop::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  border: 2px solid var(--ivory);
+}
+
+.stop-time {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.stop-label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.stop-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 1px 12px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+
+.stop-tag.stay { background: rgba(58, 122, 106, 0.08); color: var(--sea); }
+.stop-tag.activity { background: rgba(184, 90, 58, 0.08); color: var(--terracotta); }
+.stop-tag.food { background: rgba(221, 138, 90, 0.08); color: var(--sunset); }
+.stop-tag.attraction { background: rgba(201, 168, 76, 0.08); color: var(--gold); }
+
+.itinerary-footer {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.itinerary-footer .btn {
+  padding: 12px 32px;
+  font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .itinerary-footer .btn { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   KAPIL INSIDER — Merged Events + Local Tips
+   ============================================================ */
+.insider {
+  background: var(--deep-2);
+  color: var(--white);
+}
+.insider .section-head p { color: rgba(255, 255, 255, 0.65); }
+.insider .eyebrow { color: var(--sunset); }
+
+.insider-tabs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.insider-tab {
+  padding: 10px 28px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s var(--ease);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+.insider-tab:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+.insider-tab.active {
+  color: var(--white);
+  background: rgba(221, 138, 90, 0.15);
+  border-color: rgba(221, 138, 90, 0.3);
+  box-shadow: 0 4px 20px rgba(221, 138, 90, 0.05);
+}
+.insider-content {
+  display: none;
+  animation: fade-up 0.5s var(--ease);
+}
+.insider-content.active { display: block; }
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.event-item {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  display: flex;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 18px;
+  transition: transform 0.3s var(--ease);
+}
+.event-item:hover { transform: translateX(4px); }
+.event-date { flex: none; text-align: center; }
+.event-date .day {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  line-height: 1;
+  color: var(--white);
+}
+.event-date .month {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sunset);
+  margin-top: 2px;
+}
+.event-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex: none;
+}
+.event-copy h3 {
+  color: var(--white);
+  font-size: 16px;
+}
+.event-copy p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.insider-feature {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 420px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-lg);
+}
+.insider-feature img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.insider-feature::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 42, 34, 0.9) 0%, rgba(15, 42, 34, 0.3) 60%, transparent 100%);
+}
+.insider-feature-copy {
+  position: relative;
+  z-index: 2;
+  max-width: 420px;
+  padding: 48px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.insider-feature-copy h3 {
+  font-size: 28px;
+  color: var(--white);
+  margin: 10px 0 12px;
+}
+.insider-feature-copy p { color: rgba(255, 255, 255, 0.8); }
+@media (max-width: 640px) { .insider-feature-copy { padding: 28px; } }
+
+.insider-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .insider-row { grid-template-columns: repeat(2, 1fr); } }
+.insider-tile .media {
+  aspect-ratio: 3/4;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.insider-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.insider-tile:hover img { transform: scale(1.05); }
+.insider-tile .eyebrow { margin-top: 12px; display: block; }
+.insider-tile h3 {
+  font-size: 16px;
+  color: var(--white);
+  margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .insider-tabs { gap: 8px; }
+  .insider-tab { font-size: 12px; padding: 8px 18px; }
+  .insider-feature-copy { padding: 28px; }
+  .insider-feature-copy h3 { font-size: 22px; }
+  .event-item { flex: 0 0 280px; }
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+@media (max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .testimonial-grid { grid-template-columns: 1fr; } }
+.testimonial-card {
+  padding: 28px 24px;
+  border-radius: var(--radius-lg);
+  background: var(--ivory);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  border: 1px solid var(--line);
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.testimonial-card .stars {
+  color: var(--gold);
+  font-size: 14px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.testimonial-card blockquote {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.testimonial-card .attribution {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sea);
+}
+.testimonial-card .attribution span {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--deep-2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 56px 0 28px;
+}
+.footer .logo { color: var(--white); }
+.footer .logo em { color: var(--sunset); }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 36px;
+  margin: 36px 0 40px;
+}
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+.footer-grid h4 {
+  color: var(--white);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+.footer-grid ul { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.footer-grid ul a {
+  transition: all 0.3s var(--ease);
+}
+.footer-grid ul a:hover {
+  color: var(--white);
+  transform: translateX(4px);
+}
+.footer-note {
+  font-size: 12px;
+  opacity: 0.4;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 20px;
+}
+
+/* ============================================================
+   RESPONSIVE FIXES
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-content { padding: 0 0 60px; }
+  .hero-content h1 { font-size: 38px; }
+  .hero-content .lead { font-size: 16px; }
+  .hero-search-row { flex-wrap: wrap; background: transparent; padding: 0; border: none; backdrop-filter: none; }
+  .hero-search-row input {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 60px;
+    padding: 14px 20px;
+    width: 100%;
+  }
+  .hero-search-row button { width: 100%; justify-content: center; }
+  .quick-chips { gap: 10px; }
+  .quick-chip { padding: 12px 18px; min-width: 70px; }
+  .quick-chip .chip-icon { font-size: 22px; }
+  .quick-chip .chip-label { font-size: 11px; }
+  .nearby-pills { gap: 8px; }
+  .nearby-pill { font-size: 12px; padding: 8px 16px; }
+}
+
+@media (max-width: 480px) {
+  .quick-chips { gap: 8px; }
+  .quick-chip { padding: 10px 14px; min-width: 60px; }
+  .quick-chip .chip-icon { font-size: 18px; }
+  .quick-chip .chip-label { font-size: 10px; }
+}
+
+#stays-section,
+#food-section,
+#local-guide-section,
+#nearby-section,
+#planner-section,
+#insider-section {
+  scroll-margin-top: 80px;
+}
+</style>
 </head>
 <body>
 
 <!-- ===== NAV ===== -->
 <nav class="nav nav--overlay" id="siteNav">
   <div class="nav-inner">
-    <a href="#" class="logo">Xplore <em>Kapil</em></a>
+    <a href="#home" class="logo">Xplore <em>Kapil</em></a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#explore-section">Explore</a></li>
-      <li><a href="#insider-section">Local Guide</a></li>
+      <li><a href="#stays-section">Stays</a></li>
+      <li><a href="#food-section">Food</a></li>
+      <li><a href="#local-guide-section">Hidden Gems</a></li>
       <li><a href="#nearby-section">Nearby</a></li>
       <li><a href="#planner-section">Trip Planner</a></li>
+      <li><a href="#insider-section">Insider</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="#explore-section" class="btn btn-sm" style="border:1.5px solid currentColor; border-radius:40px; padding:8px 20px; font-weight:600; font-size:12px;">List your place</a>
+      <a href="#" class="btn btn-sm" style="border:1.5px solid currentColor; border-radius:40px; padding:8px 20px; font-weight:600; font-size:12px;">List your place</a>
       <button class="nav-menu-btn" id="menuOpen" aria-label="Open menu">☰</button>
     </div>
   </div>
@@ -37,76 +1767,69 @@
   </div>
   <div class="mobile-menu-links">
     <a href="#home">Home</a>
-    <a href="#explore-section">Explore</a>
-    <a href="#insider-section">Local Guide</a>
+    <a href="#stays-section">Stays</a>
+    <a href="#food-section">Food</a>
+    <a href="#local-guide-section">Hidden Gems</a>
     <a href="#nearby-section">Nearby</a>
     <a href="#planner-section">Trip Planner</a>
+    <a href="#insider-section">Insider</a>
   </div>
 </div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
   <div class="hero-media">
-    <img src="assets/images/hero/hero-bg.png" alt="Kapil coastline at golden hour">
+    <video autoplay muted loop playsinline>
+      <source src="assets/videos/waves1.mp4" type="video/mp4" />
+      <img src="assets/images/hero/hero-bg.png" alt="Kapil coastline at golden hour">
+    </video>
+  </div>
+  <div class="hero-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+  <div class="hero-particles">
+    <span class="p"></span><span class="p"></span><span class="p"></span>
+    <span class="p"></span><span class="p"></span><span class="p"></span>
+    <span class="p"></span><span class="p"></span>
   </div>
   <div class="container hero-content">
-    <span class="eyebrow on-dark">Kapil · Kerala Coast</span>
-    <h1>Discover Kapil<br>beyond the usual.</h1>
+    <span class="eyebrow on-dark"><i class="fas fa-location-dot" style="margin-right:6px;"></i> Kapil · Kerala Coast</span>
+    <h1>Discover Kapil<br><span class="highlight">beyond the usual</span></h1>
     <p class="lead">Stays, sunsets, and the small stuff no map tells you — Xplore is the local friend you didn't know you needed.</p>
     <div class="hero-search">
       <form class="hero-search-row" id="heroSearch">
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="M19 19l-4.35-4.35"/></svg>
         <input type="text" id="heroSearchInput" placeholder="Where do you want to explore?" autocomplete="off" />
-        <button type="submit">Search</button>
+        <button type="submit"><span>Search</span></button>
       </form>
     </div>
   </div>
-  <div class="scroll-cue"><span class="line"></span> Scroll</div>
+  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
 </section>
 
 <!-- ===== DISCOVER STRIP ===== -->
 <div class="discover-strip" id="discoverStrip">
   <a class="discover-item" href="#stays-section">
     <img src="assets/images/stays/tide-line-cottage.png" alt="Stays">
-    <span>
-      <span class="d-num">01</span>
-      <span class="d-label">Stay</span>
-    </span>
+    <span><span class="d-num">01</span><span class="d-label">Stay</span></span>
   </a>
   <a class="discover-item" href="#food-section">
     <img src="assets/images/food/ammasfood.png" alt="Food">
-    <span>
-      <span class="d-num">02</span>
-      <span class="d-label">Eat</span>
-    </span>
+    <span><span class="d-num">02</span><span class="d-label">Eat</span></span>
   </a>
-  <a class="discover-item" href="#explore-section">
-    <img src="assets/images/hero/hero-bg.png" alt="Explore">
-    <span>
-      <span class="d-num">03</span>
-      <span class="d-label">Explore</span>
-    </span>
-  </a>
-  <a class="discover-item" href="#activities-section">
-    <img src="assets/images/discover/activities.png" alt="Activities">
-    <span>
-      <span class="d-num">04</span>
-      <span class="d-label">Activities</span>
-    </span>
+  <a class="discover-item" href="#local-guide-section">
+    <img src="assets/images/discover/insider.png" alt="Gems">
+    <span><span class="d-num">03</span><span class="d-label">Gems</span></span>
   </a>
   <a class="discover-item" href="#nearby-section">
     <img src="assets/images/discover/nearby.png" alt="Nearby">
-    <span>
-      <span class="d-num">05</span>
-      <span class="d-label">Nearby</span>
-    </span>
+    <span><span class="d-num">04</span><span class="d-label">Nearby</span></span>
+  </a>
+  <a class="discover-item" href="#planner-section">
+    <img src="assets/images/hero/hero-bg.png" alt="Plan">
+    <span><span class="d-num">05</span><span class="d-label">Plan</span></span>
   </a>
   <a class="discover-item" href="#insider-section">
     <img src="assets/images/discover/insider.png" alt="Insider">
-    <span>
-      <span class="d-num">06</span>
-      <span class="d-label">Insider</span>
-    </span>
+    <span><span class="d-num">06</span><span class="d-label">Insider</span></span>
   </a>
 </div>
 
@@ -122,9 +1845,7 @@
         <h2>Where the coast slows down.</h2>
         <p>Kapil isn't a checklist beach. It's a working coastline — fishing boats at dawn, backwaters that thread behind the dunes, and villages where the day still runs on the tide.</p>
         <p>Xplore exists because most of what makes this place worth visiting was never online — until a local coordinator wrote it down for you.</p>
-        <ul class="story-list">
-          <li>Sea</li><li>Backwaters</li><li>Villages</li><li>Food</li><li>Local life</li>
-        </ul>
+        <ul class="story-list"><li>Sea</li><li>Backwaters</li><li>Villages</li><li>Food</li><li>Local life</li></ul>
         <div style="margin-top:24px; display:flex; gap:12px; align-items:center;">
           <span class="badge-verified">
             <svg viewBox="0 0 20 20"><path d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
@@ -136,7 +1857,9 @@
   </div>
 </section>
 
-<!-- ===== STAYS FEATURE ===== -->
+<!-- ============================================================
+   SECTION 1: POPULAR STAYS
+   ============================================================ -->
 <section id="stays-section" style="background:var(--sand);">
   <div class="container">
     <div class="section-head-row reveal">
@@ -144,38 +1867,15 @@
         <span class="eyebrow on-light">Popular stays</span>
         <h2>Find your kind of quiet.</h2>
       </div>
-      <a href="#explore-section?type=stays" class="btn btn-outline btn-sm">See all stays →</a>
+      <a href="stays.html" class="btn btn-outline btn-sm">See all stays →</a>
     </div>
     <div class="feature-split" id="staysFeature"></div>
   </div>
 </section>
 
-<!-- ===== ACTIVITIES ===== -->
-<section id="activities-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow on-light">Things to do</span>
-      <h2>The coast has more than a beach.</h2>
-      <p>Kayaking at sunrise, a village cycling loop, or a boat out with a fishing family.</p>
-    </div>
-    <div class="hscroll reveal" id="activitiesScroll"></div>
-  </div>
-</section>
-
-<!-- ===== LOCAL INSIDER ===== -->
-<section class="insider" id="insider-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow on-dark">Loved by locals</span>
-      <h2>Local Insider</h2>
-      <p>What locals actually recommend — not what pays for placement.</p>
-    </div>
-    <div id="insiderFeature" class="reveal"></div>
-    <div class="insider-row" id="insiderRow"></div>
-  </div>
-</section>
-
-<!-- ===== FOOD FEATURE ===== -->
+<!-- ============================================================
+   SECTION 2: FOOD & RESTAURANTS
+   ============================================================ -->
 <section id="food-section">
   <div class="container">
     <div class="section-head-row reveal">
@@ -183,74 +1883,328 @@
         <span class="eyebrow on-light">Food &amp; restaurants</span>
         <h2>Eat the way Kapil eats.</h2>
       </div>
-      <a href="#explore-section?type=food" class="btn btn-outline btn-sm">See all places to eat →</a>
+      <a href="food.html" class="btn btn-outline btn-sm">See all places to eat →</a>
     </div>
     <div class="feature-split reverse" id="foodFeature"></div>
   </div>
 </section>
 
-<!-- ===== NEARBY ===== -->
-<section id="nearby-section" style="background:var(--sand);">
+<!-- ============================================================
+   SECTION 3: HIDDEN GEMS
+   ============================================================ -->
+<section id="local-guide-section" style="padding:100px 0; background:var(--ivory);">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow on-light">Explore nearby</span>
-      <h2>Whatever you need is closer than you think.</h2>
-      <p>Pharmacies, ATMs, and the nearest place for coconut water — all mapped around you.</p>
+    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <span class="eyebrow on-light">Hidden Gems of Kapil</span>
+      <h2>Beyond the tourist trail.</h2>
+      <p>Discover the secret spots, local favourites, and off-the-beaten-path experiences — curated by locals who actually live here.</p>
     </div>
-    <div class="nearby-tabs reveal" id="nearbyTabs">
-      <button class="nearby-tab active" data-cat="essentials">Essentials</button>
-      <button class="nearby-tab" data-cat="stays">Stay</button>
-      <button class="nearby-tab" data-cat="food">Food</button>
-      <button class="nearby-tab" data-cat="activities">Activities</button>
-    </div>
-    <div class="nearby reveal">
-      <div class="nearby-map" id="nearbyMap"></div>
-      <div class="nearby-list" id="nearbyList"></div>
-    </div>
-  </div>
-</section>
 
-<!-- ===== TRIP PLANNER ===== -->
-<section class="planner" id="planner-section">
-  <div class="container">
-    <div class="planner-head reveal">
-      <span class="tag-plain">Your Kapil escape</span>
-      <span class="tag-plain">2 days</span>
-      <span class="tag-plain">Couple</span>
-      <span class="tag-plain">₹15,000</span>
-      <h2>Build your perfect Kapil trip.</h2>
-    </div>
-    <div class="timeline reveal">
-      <div class="timeline-day">
-        <p class="timeline-day-label">Day 01 — Settle in</p>
-        <div class="timeline-stop"><p class="time">Morning</p><p class="label">Check in at Tide Line Cottage</p></div>
-        <div class="timeline-stop"><p class="time">Afternoon</p><p class="label">Backwater fishing trip with Rajan's crew</p></div>
-        <div class="timeline-stop"><p class="time">Evening</p><p class="label">Sunset at Kapil bridge, dinner at The Fisherman's Table</p></div>
+    <div class="local-guide-grid reveal" id="localGuideGrid">
+      <!-- Card 1 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/boating.jpg" alt="Secret backwater channel">
+        </div>
+        <div class="body">
+          <span class="tag-label">🌿 Hidden Gem</span>
+          <h3>Secret Backwater Channel</h3>
+          <p>A narrow palm-fringed canal only locals know about — perfect for a quiet paddle at sunrise.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
       </div>
-      <div class="timeline-day">
-        <p class="timeline-day-label">Day 02 — Go further</p>
-        <div class="timeline-stop"><p class="time">Morning</p><p class="label">Sunrise kayaking on the backwater</p></div>
-        <div class="timeline-stop"><p class="time">Afternoon</p><p class="label">Village cycling tour + hidden backwater channel</p></div>
-        <div class="timeline-stop"><p class="time">Evening</p><p class="label">Beach yoga, dinner at Amma's Seafood Shack</p></div>
+
+      <!-- Card 2 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/sunset.png" alt="Sunset viewpoint">
+        </div>
+        <div class="body">
+          <span class="tag-label">🌅 Best Sunset</span>
+          <h3>Sunset Point</h3>
+          <p>A rocky outcrop past the bridge — locals' favourite spot to watch the sun melt into the Arabian Sea.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/unamedresturant.png" alt="Local breakfast stall">
+        </div>
+        <div class="body">
+          <span class="tag-label">🍛 Local Food</span>
+          <h3>Unnamed Breakfast Stall</h3>
+          <p>No sign, no menu — just the best puttu and kadala curry in Kapil. Open from 6am until it sells out.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/fishing.png" alt="Fishing village experience">
+        </div>
+        <div class="body">
+          <span class="tag-label">🎣 Experience</span>
+          <h3>Fishing Village Walk</h3>
+          <p>Walk through a working fishing village, meet the families, and see how the day's catch comes in.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/yoga.png" alt="Beach yoga spot">
+        </div>
+        <div class="body">
+          <span class="tag-label">🧘 Wellness</span>
+          <h3>Quiet Beach Yoga Spot</h3>
+          <p>A secluded stretch of sand north of the main beach — perfect for sunrise yoga with no crowds.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="local-guide-card tilt-3d">
+        <div class="media">
+          <img src="assets/images/hiddengems/adventure.png" alt="Village cycling route">
+        </div>
+        <div class="body">
+          <span class="tag-label">🚴 Adventure</span>
+          <h3>Village Cycling Loop</h3>
+          <p>A 10km loop through paddy fields, coconut groves, and tiny villages — flat, quiet, and beautiful.</p>
+          <div style="margin-top:10px;">
+            <span class="badge-verified" style="font-size:8px;">
+              <svg viewBox="0 0 20 20" width="10" height="10"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
+              Local verified
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="section-foot reveal"><a href="#explore-section" class="btn btn-outline">Plan a trip like this →</a></div>
-  </div>
-</section>
 
-<!-- ===== EVENTS ===== -->
-<section class="events-section">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow on-dark">Happening in Kapil</span>
-      <h2>Events &amp; local happenings.</h2>
-      <p>From beach music nights to community feasts — Kapil has a rhythm of its own.</p>
+    <div class="section-foot reveal" style="text-align:center; margin-top:48px;">
+      <a href="explore.html" class="btn btn-primary" style="padding:16px 48px; font-size:16px;">
+        Explore All Hidden Gems →
+      </a>
+      <p style="margin-top:14px; font-size:13px; color:var(--muted);">
+        More secret spots, local experiences, and off-the-beaten-path adventures waiting for you.
+      </p>
     </div>
-    <div class="hscroll reveal" id="eventsScroll"></div>
   </div>
 </section>
 
-<!-- ===== TESTIMONIALS ===== -->
+<!-- ============================================================
+   SECTION 4: EXPLORE NEARBY
+   ============================================================ -->
+<section id="nearby-section" style="background:var(--sand); padding:100px 0;">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <span class="eyebrow on-light">Explore Nearby</span>
+      <h2 style="font-size:clamp(32px, 4vw, 44px);">Everything you need,<br>right around you</h2>
+      <p style="font-size:16px; color:var(--muted);">Pharmacies, ATMs, bike rentals, hospitals, cinemas, and more — all mapped and ready for you. No more wandering around looking for essentials.</p>
+    </div>
+
+    <!-- Quick Action Chips -->
+    <div class="quick-chips reveal" id="quickChips">
+      <button class="quick-chip" data-category="pharmacy">
+        <span class="chip-icon">💊</span>
+        <span class="chip-label">Pharmacy</span>
+      </button>
+      <button class="quick-chip" data-category="atm">
+        <span class="chip-icon">🏧</span>
+        <span class="chip-label">ATM</span>
+      </button>
+      <button class="quick-chip" data-category="bike-rental">
+        <span class="chip-icon">🏍️</span>
+        <span class="chip-label">Bike Rental</span>
+      </button>
+      <button class="quick-chip" data-category="hospital">
+        <span class="chip-icon">🏥</span>
+        <span class="chip-label">Hospital</span>
+      </button>
+      <button class="quick-chip" data-category="taxi">
+        <span class="chip-icon">🚕</span>
+        <span class="chip-label">Taxi</span>
+      </button>
+      <button class="quick-chip" data-category="cinema">
+        <span class="chip-icon">🎬</span>
+        <span class="chip-label">Cinema</span>
+      </button>
+    </div>
+
+    <!-- Category Pills -->
+    <div class="nearby-pills reveal" id="nearbyPills">
+      <button class="nearby-pill active" data-cat="all">All</button>
+      <button class="nearby-pill" data-cat="medical">💊 Medical</button>
+      <button class="nearby-pill" data-cat="essentials">🏧 Essentials</button>
+      <button class="nearby-pill" data-cat="transport">🚗 Transport</button>
+      <button class="nearby-pill" data-cat="services">🔧 Services</button>
+      <button class="nearby-pill" data-cat="entertainment">🎬 Entertainment</button>
+    </div>
+
+    <!-- Results Grid -->
+    <div class="nearby-grid reveal" id="nearbyGrid">
+      <!-- Cards rendered by JavaScript -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+   SECTION 5: TRIP PLANNER (AI-POWERED DEMO)
+   ============================================================ -->
+<section class="planner" id="planner-section" style="padding:100px 0;">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <span class="eyebrow on-light">Trip Planner</span>
+      <h2 style="font-size:clamp(32px, 4vw, 44px);">Build your perfect<br>Kapil escape</h2>
+      <p style="font-size:16px; color:var(--muted);">Choose your travel style, duration, and budget — our AI will create a personalized itinerary just for you.</p>
+    </div>
+
+    <!-- Trip Builder -->
+    <div class="trip-builder reveal">
+      <div class="trip-row">
+        <div class="trip-label">Travel with</div>
+        <div class="trip-options" data-group="travel">
+          <button class="trip-opt active" data-value="couple">❤️ Couple</button>
+          <button class="trip-opt" data-value="family">👨‍👩‍👧‍👦 Family</button>
+          <button class="trip-opt" data-value="solo">🧘 Solo</button>
+          <button class="trip-opt" data-value="backpacker">🎒 Backpacker</button>
+        </div>
+      </div>
+
+      <div class="trip-row">
+        <div class="trip-label">Duration</div>
+        <div class="trip-options" data-group="duration">
+          <button class="trip-opt active" data-value="2">2 Days</button>
+          <button class="trip-opt" data-value="3">3 Days</button>
+          <button class="trip-opt" data-value="5">5 Days</button>
+          <button class="trip-opt" data-value="7">7 Days</button>
+        </div>
+      </div>
+
+      <div class="trip-row">
+        <div class="trip-label">Budget</div>
+        <div class="trip-options" data-group="budget">
+          <button class="trip-opt active" data-value="15000">₹15,000</button>
+          <button class="trip-opt" data-value="25000">₹25,000</button>
+          <button class="trip-opt" data-value="50000">₹50,000</button>
+          <button class="trip-opt" data-value="premium">✨ Premium</button>
+        </div>
+      </div>
+
+      <button class="trip-generate" id="generateBtn">
+        <i class="fas fa-wand-magic-sparkles"></i> Generate My Itinerary
+      </button>
+    </div>
+
+    <!-- AI Loading Animation -->
+    <div class="ai-loading" id="aiLoading" style="display:none;">
+      <div class="ai-thinking">
+        <div class="ai-brain"><i class="fas fa-brain"></i></div>
+        <div class="ai-pulse-ring"></div>
+        <div class="ai-pulse-ring" style="animation-delay: 0.5s;"></div>
+        <div class="ai-pulse-ring" style="animation-delay: 1s;"></div>
+        <div class="ai-dots"><span>.</span><span>.</span><span>.</span></div>
+      </div>
+      <p class="ai-status" id="aiStatus">Analyzing your preferences...</p>
+      <div class="ai-progress">
+        <div class="ai-progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <!-- Generated Itinerary -->
+<div class="itinerary generated" id="generatedItinerary" style="display:none;">
+  <div class="itinerary-header">
+    <span class="itinerary-badge">🧠 AI Generated</span>
+    <h3 id="itineraryTitle">Your Kapil Escape</h3>
+    <p id="itinerarySubtitle">Personalized for you</p>
+  </div>
+
+  <div class="itinerary-days" id="itineraryDays">
+    <!-- Generated by JavaScript -->
+  </div>
+
+  <div class="itinerary-footer">
+    <button class="btn btn-outline" id="regenerateBtn" style="border-color:var(--line);">
+      <i class="fas fa-rotate"></i> Regenerate
+    </button>
+    <button class="btn btn-primary" id="saveItineraryBtn">
+      <i class="fas fa-download"></i> Save Itinerary
+    </button>
+  </div>
+
+  <div class="itinerary-clear">
+    <button class="clear-btn" id="clearItineraryBtn">
+      <i class="fas fa-times-circle"></i> Clear Results
+    </button>
+  </div>
+</div>
+</section>
+
+<!-- ============================================================
+   SECTION 6: KAPIL INSIDER (Events + Local Tips)
+   ============================================================ -->
+<section class="insider" id="insider-section">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
+      <span class="eyebrow on-dark">Kapil Insider</span>
+      <h2>What's happening &amp; what locals love.</h2>
+      <p>From beach music nights and community feasts to secret spots and local favourites — everything you need to experience Kapil like a local.</p>
+    </div>
+
+    <div class="insider-tabs reveal" id="insiderTabs">
+      <button class="insider-tab active" data-tab="events">🎉 Events</button>
+      <button class="insider-tab" data-tab="tips">💡 Local Tips</button>
+    </div>
+
+    <div class="insider-content active" id="eventsContent">
+      <div class="hscroll reveal" id="eventsScroll"></div>
+    </div>
+
+    <div class="insider-content" id="tipsContent">
+      <div class="insider-feature" id="insiderFeature"></div>
+      <div class="insider-row" id="insiderRow"></div>
+    </div>
+
+    <div class="section-foot reveal" style="text-align:center; margin-top:48px;">
+      <a href="/insider.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.2); color:var(--white);">
+        Explore all insider content →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+   SECTION 7: TESTIMONIALS
+   ============================================================ -->
 <section class="testimonials">
   <div class="container">
     <div class="section-head reveal" style="text-align:center; max-width:640px; margin:0 auto 48px;">
@@ -277,166 +2231,6 @@
   </div>
 </section>
 
-<!-- ===== EXPLORE HIDDEN GEMS ===== -->
-<section id="explore-section" style="padding:100px 0; background:var(--ivory);">
-  <div class="container">
-    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
-      <span class="eyebrow on-light">Hidden Gems of Kapil</span>
-      <h2>Beyond the tourist trail.</h2>
-      <p>Discover the secret spots, local favourites, and off-the-beaten-path experiences that make Kapil truly special.</p>
-    </div>
-
-    <div class="grid reveal" id="hiddenGemsGrid">
-      <!-- Card 1 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/boating.jpg" alt="Secret backwater channel">
-          <span class="card-badge">🌿 Hidden Gem</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Secret Backwater Channel</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">A narrow palm-fringed canal only locals know about — perfect for a quiet paddle at sunrise.</p>
-          <div class="card-tags">
-            <span class="tag">🌅 Sunrise</span>
-            <span class="tag">🚣 Kayak</span>
-            <span class="tag">📷 Photo</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/sunset.png" alt="Sunset viewpoint">
-          <span class="card-badge">🌅 Best Sunset</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Sunset Point</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">A rocky outcrop past the bridge — locals' favourite spot to watch the sun melt into the Arabian Sea.</p>
-          <div class="card-tags">
-            <span class="tag">🌅 Sunset</span>
-            <span class="tag">❤️ Romantic</span>
-            <span class="tag">📷 Photo</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/unamedresturant.png" alt="Local breakfast stall">
-          <span class="card-badge">🍛 Local Food</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Unnamed Breakfast Stall</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">No sign, no menu — just the best puttu and kadala curry in Kapil. Open from 6am until it sells out.</p>
-          <div class="card-tags">
-            <span class="tag">🍛 Breakfast</span>
-            <span class="tag">💰 Budget</span>
-            <span class="tag">🌿 Local</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/fishing.png" alt="Fishing village experience">
-          <span class="card-badge">🎣 Experience</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Fishing Village Walk</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">Walk through a working fishing village, meet the families, and see how the day's catch comes in.</p>
-          <div class="card-tags">
-            <span class="tag">🎣 Fishing</span>
-            <span class="tag">🌿 Culture</span>
-            <span class="tag">📷 Photo</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 5 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/yoga.png" alt="Beach yoga spot">
-          <span class="card-badge">🧘 Wellness</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Quiet Beach Yoga Spot</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">A secluded stretch of sand north of the main beach — perfect for sunrise yoga with no crowds.</p>
-          <div class="card-tags">
-            <span class="tag">🧘 Yoga</span>
-            <span class="tag">🌅 Sunrise</span>
-            <span class="tag">❤️ Relax</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 6 -->
-      <div class="card">
-        <div class="card-media">
-          <img src="assets/images/hiddengems/adventure.png" alt="Village cycling route">
-          <span class="card-badge">🚴 Adventure</span>
-        </div>
-        <div class="card-body">
-          <div class="card-top"><h3>Village Cycling Loop</h3></div>
-          <p class="card-loc" style="font-size:14px; color:var(--muted);">A 10km loop through paddy fields, coconut groves, and tiny villages — flat, quiet, and beautiful.</p>
-          <div class="card-tags">
-            <span class="tag">🚴 Cycling</span>
-            <span class="tag">🌿 Nature</span>
-            <span class="tag">💰 Budget</span>
-          </div>
-          <div style="margin-top:12px;">
-            <span class="badge-verified" style="font-size:9px;">
-              <svg viewBox="0 0 20 20" width="12" height="12"><path fill="white" d="M10 0C4.5 0 0 4.5 0 10s4.5 10 10 10 10-4.5 10-10S15.5 0 10 0zm-1 15l-4-4 1.4-1.4L9 12.2l5.6-5.6L16 8l-7 7z"/></svg>
-              Local verified
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-foot reveal" style="text-align:center; margin-top:48px;">
-      <a href="#" class="btn btn-primary" style="padding:16px 48px; font-size:16px;">
-        Explore All Hidden Gems →
-      </a>
-      <p style="margin-top:14px; font-size:13px; color:var(--muted);">
-        More secret spots, local experiences, and off-the-beaten-path adventures waiting for you.
-      </p>
-    </div>
-  </div>
-</section>
-
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
   <div class="container">
@@ -448,15 +2242,20 @@
       </div>
       <div>
         <h4>Explore</h4>
-        <ul><li><a href="#explore-section?type=stays">Stays</a></li><li><a href="#explore-section?type=food">Food</a></li><li><a href="#explore-section?type=activities">Activities</a></li><li><a href="#insider-section">Local guide</a></li></ul>
+        <ul>
+          <li><a href="explore.html"><i class="fas fa-gem"></i> Hidden Gems</a></li>
+          <li><a href="stays.html"><i class="fas fa-bed"></i> Stays</a></li>
+          <li><a href="food.html"><i class="fas fa-utensils"></i> Food</a></li>
+          <li><a href="nearby.html"><i class="fas fa-map-pin"></i> Nearby</a></li>
+        </ul>
       </div>
       <div>
         <h4>For businesses</h4>
-        <ul><li><a href="#">List your place</a></li><li><a href="#">Become a coordinator</a></li></ul>
+        <ul><li><a href="#"><i class="fas fa-store"></i> List your place</a></li><li><a href="#"><i class="fas fa-user-plus"></i> Become a coordinator</a></li></ul>
       </div>
       <div>
         <h4>Coming soon</h4>
-        <ul><li>Xplore Varkala</li><li>Xplore Kovalam</li></ul>
+        <ul><li><i class="fas fa-map-pin"></i> Xplore Varkala</li><li><i class="fas fa-map-pin"></i> Xplore Kovalam</li></ul>
       </div>
     </div>
     <p class="footer-note">Xplore Kapil is a prototype. Listings, tips and reviews shown are placeholder content for demonstration only.</p>
@@ -467,6 +2266,404 @@
 <script src="js/data.js"></script>
 <script src="js/navigation.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+// ============================================================
+// NEARBY DATA & FILTER
+// ============================================================
+(function() {
+  const nearbyData = [
+    { id: 1, name: 'Kapil Pharmacy', category: 'medical', icon: '💊', iconClass: 'medical', distance: '180m', location: 'Kapil market road', tag: 'Open now' },
+    { id: 2, name: 'SBI ATM — Kapil Junction', category: 'essentials', icon: '🏧', iconClass: 'essential', distance: '350m', location: 'Kapil main road', tag: '24/7' },
+    { id: 3, name: 'Rajan\'s Bike Rentals', category: 'transport', icon: '🏍️', iconClass: 'transport', distance: '250m', location: 'Kapil main road', tag: 'Open now' },
+    { id: 4, name: 'Coastal Care Hospital', category: 'medical', icon: '🏥', iconClass: 'medical', distance: '1.2km', location: 'Kapil–Edava road', tag: '24/7' },
+    { id: 5, name: 'Kapil Laundry Service', category: 'services', icon: '🧺', iconClass: 'service', distance: '600m', location: 'Kapil market lane', tag: 'Open now' },
+    { id: 6, name: 'Kapil Cinema', category: 'entertainment', icon: '🎬', iconClass: 'entertainment', distance: '900m', location: 'Kapil main road', tag: 'Open now' },
+    { id: 7, name: 'Kapil Police Station', category: 'emergency', icon: '🚨', iconClass: 'emergency', distance: '600m', location: 'Kapil beach road', tag: '24/7' },
+    { id: 8, name: 'Fresh Mart Grocery', category: 'essentials', icon: '🛒', iconClass: 'essential', distance: '500m', location: 'Kapil village centre', tag: 'Open now' },
+    { id: 9, name: 'Indian Oil Petrol Pump', category: 'transport', icon: '⛽', iconClass: 'transport', distance: '800m', location: 'Kapil–Edava road', tag: '6AM - 11PM' },
+    { id: 10, name: 'Kapil Internet Café', category: 'services', icon: '💻', iconClass: 'service', distance: '400m', location: 'Kapil main road', tag: 'Open now' },
+  ];
+
+  function renderNearbyCards(filter = 'all') {
+    const grid = document.getElementById('nearbyGrid');
+    if (!grid) return;
+
+    let filtered = nearbyData;
+    if (filter !== 'all') {
+      filtered = nearbyData.filter(item => item.category === filter);
+    }
+
+    grid.innerHTML = filtered.map(item => `
+      <div class="nearby-card" data-category="${item.category}">
+        <div class="nc-icon ${item.iconClass}">${item.icon}</div>
+        <div class="nc-info">
+          <h4>${item.name}</h4>
+          <p>${item.location}</p>
+          <span class="nc-tag ${item.tag === '24/7' ? 'emergency' : ''}">${item.tag}</span>
+        </div>
+        <div class="nc-dist">${item.distance}</div>
+      </div>
+    `).join('');
+  }
+
+  // Nearby Pills
+  document.querySelectorAll('.nearby-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.nearby-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      renderNearbyCards(this.dataset.cat);
+    });
+  });
+
+  // Quick Chips
+  document.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.quick-chip').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+
+      const categoryMap = {
+        'pharmacy': 'medical',
+        'atm': 'essentials',
+        'bike-rental': 'transport',
+        'hospital': 'medical',
+        'taxi': 'transport',
+        'cinema': 'entertainment'
+      };
+
+      const mappedCategory = categoryMap[this.dataset.category] || 'all';
+
+      document.querySelectorAll('.nearby-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.cat === mappedCategory);
+      });
+
+      renderNearbyCards(mappedCategory);
+    });
+  });
+
+  // Initial render
+  renderNearbyCards('all');
+})();
+
+// ============================================================
+// AI TRIP PLANNER — DEMO (WITH CLEAR FUNCTIONALITY)
+// ============================================================
+(function() {
+  const generateBtn = document.getElementById('generateBtn');
+  const aiLoading = document.getElementById('aiLoading');
+  const progressBar = document.getElementById('progressBar');
+  const generatedItinerary = document.getElementById('generatedItinerary');
+  const itineraryTitle = document.getElementById('itineraryTitle');
+  const itinerarySubtitle = document.getElementById('itinerarySubtitle');
+  const itineraryDays = document.getElementById('itineraryDays');
+  const regenerateBtn = document.getElementById('regenerateBtn');
+  const clearBtn = document.getElementById('clearItineraryBtn');
+  const saveBtn = document.getElementById('saveItineraryBtn');
+  const aiStatus = document.getElementById('aiStatus');
+
+  const itineraries = {
+    couple: {
+      title: 'Romantic Kapil Escape',
+      subtitle: 'A dreamy getaway for two',
+      days: [
+        {
+          name: 'Settle in',
+          stops: [
+            { time: 'Morning', label: 'Check in at Tide Line Cottage', tag: 'stay' },
+            { time: 'Afternoon', label: 'Sunset cruise on the backwaters', tag: 'activity' },
+            { time: 'Evening', label: 'Candlelight dinner at The Fisherman\'s Table', tag: 'food' }
+          ]
+        },
+        {
+          name: 'Go further',
+          stops: [
+            { time: 'Morning', label: 'Sunrise kayaking on the backwater', tag: 'activity' },
+            { time: 'Afternoon', label: 'Private beach picnic at Secret Cove', tag: 'attraction' },
+            { time: 'Evening', label: 'Sunset yoga, dinner at Amma\'s Seafood Shack', tag: 'food' }
+          ]
+        }
+      ]
+    },
+    family: {
+      title: 'Family Fun in Kapil',
+      subtitle: 'Memories that last a lifetime',
+      days: [
+        {
+          name: 'Settle in',
+          stops: [
+            { time: 'Morning', label: 'Check in at Palm Row Family Resort', tag: 'stay' },
+            { time: 'Afternoon', label: 'Backwater fishing trip with Rajan\'s crew', tag: 'activity' },
+            { time: 'Evening', label: 'Family dinner at Grandma\'s Kitchen', tag: 'food' }
+          ]
+        },
+        {
+          name: 'Go further',
+          stops: [
+            { time: 'Morning', label: 'Village cycling tour for all ages', tag: 'activity' },
+            { time: 'Afternoon', label: 'Beach games & coconut water break', tag: 'attraction' },
+            { time: 'Evening', label: 'Bonfire night with local stories', tag: 'food' }
+          ]
+        }
+      ]
+    },
+    solo: {
+      title: 'Solo Soulful Journey',
+      subtitle: 'Discover yourself in Kapil',
+      days: [
+        {
+          name: 'Settle in',
+          stops: [
+            { time: 'Morning', label: 'Check in at Wanderer\'s Wave Hostel', tag: 'stay' },
+            { time: 'Afternoon', label: 'Sunrise yoga on the beach', tag: 'activity' },
+            { time: 'Evening', label: 'Quiet dinner at Tide & Thyme Café', tag: 'food' }
+          ]
+        },
+        {
+          name: 'Go further',
+          stops: [
+            { time: 'Morning', label: 'Photography walk with local guide', tag: 'activity' },
+            { time: 'Afternoon', label: 'Explore hidden backwater channel', tag: 'attraction' },
+            { time: 'Evening', label: 'Sunset meditation, dinner at local stall', tag: 'food' }
+          ]
+        }
+      ]
+    },
+    backpacker: {
+      title: 'Backpacker\'s Adventure',
+      subtitle: 'Budget-friendly exploration',
+      days: [
+        {
+          name: 'Settle in',
+          stops: [
+            { time: 'Morning', label: 'Check in at Wanderer\'s Wave Hostel', tag: 'stay' },
+            { time: 'Afternoon', label: 'Self-guided village walking tour', tag: 'activity' },
+            { time: 'Evening', label: 'Budget dinner at Coconut Water Junction', tag: 'food' }
+          ]
+        },
+        {
+          name: 'Go further',
+          stops: [
+            { time: 'Morning', label: 'Sunrise kayaking (budget group)', tag: 'activity' },
+            { time: 'Afternoon', label: 'Cycle to hidden backwater channel', tag: 'attraction' },
+            { time: 'Evening', label: 'Local toddy shop experience', tag: 'food' }
+          ]
+        }
+      ]
+    }
+  };
+
+  const budgetTags = {
+    '15000': 'Budget-friendly',
+    '25000': 'Comfortable',
+    '50000': 'Luxury',
+    'premium': 'Premium'
+  };
+
+  const statusMessages = [
+    'Analyzing your preferences...',
+    'Curating the best experiences...',
+    'Checking local recommendations...',
+    'Optimizing your itinerary...',
+    'Almost ready...'
+  ];
+
+  function getSelectedValues() {
+    const travel = document.querySelector('.trip-options[data-group="travel"] .trip-opt.active');
+    const duration = document.querySelector('.trip-options[data-group="duration"] .trip-opt.active');
+    const budget = document.querySelector('.trip-options[data-group="budget"] .trip-opt.active');
+
+    return {
+      travel: travel ? travel.dataset.value : 'couple',
+      duration: duration ? parseInt(duration.dataset.value) : 2,
+      budget: budget ? budget.dataset.value : '15000'
+    };
+  }
+
+  function generateItinerary() {
+    const options = getSelectedValues();
+
+    generateBtn.disabled = true;
+    generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+
+    generatedItinerary.style.display = 'none';
+    aiLoading.style.display = 'block';
+    progressBar.style.width = '0%';
+    aiStatus.textContent = statusMessages[0];
+
+    let progress = 0;
+    let msgIndex = 0;
+
+    const interval = setInterval(() => {
+      progress += Math.random() * 8 + 2;
+      if (progress > 100) progress = 100;
+      progressBar.style.width = progress + '%';
+
+      if (progress > 20 + msgIndex * 20 && msgIndex < statusMessages.length - 1) {
+        msgIndex++;
+        aiStatus.textContent = statusMessages[msgIndex];
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          aiLoading.style.display = 'none';
+          displayItinerary(options.travel, options.duration, options.budget);
+          generateBtn.disabled = false;
+          generateBtn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Generate My Itinerary';
+        }, 400);
+      }
+    }, 300);
+  }
+
+  function displayItinerary(travel, duration, budget) {
+    const template = itineraries[travel] || itineraries.couple;
+    const budgetLabel = budgetTags[budget] || 'Comfortable';
+    const durationLabel = duration + ' Days';
+
+    itineraryTitle.textContent = template.title;
+    itinerarySubtitle.textContent = `${template.subtitle} · ${durationLabel} · ${budgetLabel}`;
+
+    let daysHTML = '';
+    const dayCount = Math.min(duration, template.days.length);
+
+    for (let i = 0; i < dayCount; i++) {
+      const day = template.days[i] || template.days[0];
+      const dayNum = String(i + 1).padStart(2, '0');
+
+      let stopsHTML = day.stops.map(stop => `
+        <div class="day-stop">
+          <span class="stop-time">${stop.time}</span>
+          <span class="stop-label">${stop.label}</span>
+          <span class="stop-tag ${stop.tag}">${stop.tag.charAt(0).toUpperCase() + stop.tag.slice(1)}</span>
+        </div>
+      `).join('');
+
+      daysHTML += `
+        <div class="itinerary-day">
+          <div class="day-marker">
+            <span class="day-num">${dayNum}</span>
+            <span class="day-name">${day.name}</span>
+          </div>
+          <div class="day-stops">${stopsHTML}</div>
+        </div>
+      `;
+    }
+
+    itineraryDays.innerHTML = daysHTML;
+    generatedItinerary.style.display = 'block';
+
+    setTimeout(() => {
+      generatedItinerary.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  // ============================================================
+  // CLEAR RESULTS FUNCTION
+  // ============================================================
+  function clearItinerary() {
+    // Hide the generated itinerary
+    generatedItinerary.style.display = 'none';
+    
+    // Hide loading animation if visible
+    aiLoading.style.display = 'none';
+    
+    // Reset progress bar
+    progressBar.style.width = '0%';
+    
+    // Reset status text
+    aiStatus.textContent = 'Analyzing your preferences...';
+    
+    // Enable generate button if disabled
+    generateBtn.disabled = false;
+    generateBtn.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Generate My Itinerary';
+    
+    // Clear the itinerary days content
+    itineraryDays.innerHTML = '';
+    
+    // Reset title and subtitle
+    itineraryTitle.textContent = 'Your Kapil Escape';
+    itinerarySubtitle.textContent = 'Personalized for you';
+    
+    // Remove any active states from trip options (optional)
+    // Keep them as they are so user doesn't need to re-select
+    
+    // Scroll to the top of the section
+    document.getElementById('planner-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ============================================================
+  // SAVE ITINERARY FUNCTION (Demo)
+  // ============================================================
+  function saveItinerary() {
+    alert('✅ Itinerary saved successfully!\n(This is a demo — save functionality will be added in production.)');
+  }
+
+  // ============================================================
+  // EVENT LISTENERS
+  // ============================================================
+
+  // Generate button
+  generateBtn.addEventListener('click', generateItinerary);
+
+  // Regenerate button
+  regenerateBtn.addEventListener('click', function() {
+    document.getElementById('planner-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(generateItinerary, 500);
+  });
+
+  // Clear button
+  if (clearBtn) {
+    clearBtn.addEventListener('click', clearItinerary);
+  }
+
+  // Save button
+  if (saveBtn) {
+    saveBtn.addEventListener('click', saveItinerary);
+  }
+
+  // Trip option selection
+  document.querySelectorAll('.trip-opt').forEach(opt => {
+    opt.addEventListener('click', function() {
+      const group = this.closest('.trip-options');
+      if (!group) return;
+      group.querySelectorAll('.trip-opt').forEach(o => o.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Keyboard support
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && document.activeElement === generateBtn) {
+      generateItinerary();
+    }
+  });
+
+})();
+
+// ============================================================
+// KAPIL INSIDER TABS
+// ============================================================
+(function() {
+  const tabs = document.querySelectorAll('.insider-tab');
+  const contents = {
+    events: document.getElementById('eventsContent'),
+    tips: document.getElementById('tipsContent')
+  };
+
+  if (!tabs.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      tabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      const target = this.dataset.tab;
+      Object.keys(contents).forEach(key => {
+        contents[key].classList.toggle('active', key === target);
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

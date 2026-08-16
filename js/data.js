@@ -36,6 +36,6 @@ const DATA = {
   events: [
     { id:'ev1', name:'Kapil Beach Music Evening', date:'Every Saturday, 6:30pm', location:'Kapil beach amphitheatre', image: IMAGE_BASE + 'events/music-night.png' },
     { id:'ev2', name:'Backwater Boat Festival', date:'12–14 Dec', location:'Kapil backwater channel', image: IMAGE_BASE + 'events/backwater.png' },
-    { id:'ev3', name:'Onam Sadya Community Feast', date:'Onam week', location:'Kapil village centre', image: IMAGE_BASE + 'events/onam-sadya.png' },
+    { id:'ev3', name:'Onam Sadya Community Feast', date:'24-08-2026', location:'Kapil village centre', image: IMAGE_BASE + 'events/onam-sadya.png' },
   ],
 };

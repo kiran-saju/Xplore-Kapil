@@ -113,7 +113,7 @@
     const dateLabels = {
       ev1: { day: 'SAT', month: 'WEEKLY' },
       ev2: { day: '12–14', month: 'DEC' },
-      ev3: { day: '—', month: 'ONAM' }
+      ev3: { day: '24', month: 'AUG' }
     };
 
     el.innerHTML = DATA.events.map(function(ev) {

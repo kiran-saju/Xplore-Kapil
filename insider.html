@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Insider — Xplore Kapil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ============================================================
+           XPLORE — INSIDER PAGE (PREMIUM)
+           ============================================================ */
+
+        :root {
+            --ink: #1a2a24;
+            --deep: #1a3a30;
+            --deep-2: #0f2a22;
+            --ivory: #f7f4ea;
+            --sand: #e8ddc8;
+            --line: #d6cab8;
+            --terracotta: #b85a3a;
+            --sunset: #dd8a5a;
+            --sea: #3a7a6a;
+            --white: #ffffff;
+            --muted: #5a6a62;
+            --gold: #c9a84c;
+            --shadow: 0 8px 40px rgba(18, 38, 30, 0.12);
+            --shadow-lg: 0 24px 64px rgba(18, 38, 30, 0.18);
+            --shadow-xl: 0 40px 80px rgba(18, 38, 30, 0.25);
+            --radius: 8px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --container: 1280px;
+            --font-serif: 'Fraunces', serif;
+            --font-sans: 'Inter', sans-serif;
+            --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--ivory);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+        :focus-visible {
+            outline: 2.5px solid var(--terracotta);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px) scale(0.96);
+            transition: all 1s var(--ease);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.7) rotate(-2deg);
+            transition: all 1.2s var(--ease-bounce);
+        }
+        .reveal-scale.is-visible {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        /* ===== UTILITIES ===== */
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--terracotta);
+        }
+        .eyebrow.on-dark {
+            color: var(--sunset);
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--sea);
+            background: rgba(58, 122, 106, 0.08);
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 14px;
+            border: 2px solid transparent;
+            transition: all 0.3s var(--ease);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-100%);
+            transition: transform 0.5s var(--ease);
+        }
+        .btn:hover::after {
+            transform: translateX(0);
+        }
+
+        .btn-primary {
+            background: var(--deep);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--deep-2);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(26, 58, 48, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--deep);
+            border-color: var(--line);
+        }
+        .btn-outline:hover {
+            border-color: var(--deep);
+            background: var(--deep);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .btn-sm {
+            padding: 10px 22px;
+            font-size: 12px;
+        }
+
+        /* ============================================================
+           NAVIGATION
+           ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: all 0.4s ease;
+            background: var(--ivory);
+            border-bottom: 1px solid var(--line);
+            color: var(--ink);
+        }
+        .nav.scrolled {
+            background: rgba(247, 244, 234, 0.92);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .nav-inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding: 0 20px;
+            }
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            transition: transform 0.3s var(--ease);
+        }
+        .logo:hover {
+            transform: scale(1.03);
+        }
+        .logo em {
+            font-style: normal;
+            color: var(--terracotta);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 34px;
+            font-size: 13.5px;
+            font-weight: 600;
+        }
+        .nav-links a {
+            opacity: 0.85;
+            transition: all 0.3s var(--ease);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: -4px;
+            height: 2px;
+            background: var(--terracotta);
+            transition: right 0.3s var(--ease);
+        }
+        .nav-links a:hover {
+            opacity: 1;
+        }
+        .nav-links a:hover::after {
+            right: 0;
+        }
+        .nav-links a.active {
+            opacity: 1;
+        }
+        .nav-links a.active::after {
+            right: 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .nav-menu-btn {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid currentColor;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+            background: transparent;
+            font-size: 18px;
+            transition: transform 0.3s var(--ease);
+        }
+        .nav-menu-btn:hover {
+            transform: rotate(90deg);
+        }
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-menu-btn {
+                display: flex;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: var(--deep-2);
+            padding: 32px 28px;
+            transform: translateY(-100%);
+            transition: transform 0.6s var(--ease);
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile-menu.open {
+            transform: translateY(0);
+        }
+        .mobile-menu-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mobile-menu .logo {
+            color: var(--white);
+        }
+        .mobile-menu .logo em {
+            color: var(--sunset);
+        }
+        .mobile-menu-close {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s var(--ease);
+        }
+        .mobile-menu-close:hover {
+            transform: rotate(90deg);
+        }
+        .mobile-menu-links {
+            margin-top: 56px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mobile-menu-links a {
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 600;
+            opacity: 0.7;
+            transition: all 0.3s var(--ease);
+            transform: translateX(-20px);
+        }
+        .mobile-menu-links a:hover {
+            opacity: 1;
+            transform: translateX(0);
+            color: var(--sunset);
+        }
+        .mobile-menu-links a:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+        .mobile-menu-links a:nth-child(2) {
+            transition-delay: 0.10s;
+        }
+        .mobile-menu-links a:nth-child(3) {
+            transition-delay: 0.15s;
+        }
+        .mobile-menu-links a:nth-child(4) {
+            transition-delay: 0.20s;
+        }
+        .mobile-menu-links a:nth-child(5) {
+            transition-delay: 0.25s;
+        }
+
+        /* ============================================================
+           INSIDER HERO
+           ============================================================ */
+        .insider-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(160deg, #0a1a15 0%, #1a3a30 40%, #0f2a22 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        .insider-hero .bg-glow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .insider-hero .bg-glow .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orb-float 25s ease-in-out infinite alternate;
+        }
+        .insider-hero .bg-glow .orb:nth-child(1) {
+            top: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(58, 122, 106, 0.3), transparent 70%);
+            animation-duration: 20s;
+        }
+        .insider-hero .bg-glow .orb:nth-child(2) {
+            bottom: -10%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(221, 138, 90, 0.2), transparent 70%);
+            animation-duration: 25s;
+            animation-delay: 2s;
+        }
+
+        @keyframes orb-float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(30px, -20px) scale(1.1);
+            }
+            100% {
+                transform: translate(-20px, 30px) scale(0.9);
+            }
+        }
+
+        .insider-hero .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .insider-hero .eyebrow {
+            color: var(--sunset);
+        }
+        .insider-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(36px, 5vw, 56px);
+            margin: 12px 0 16px;
+            line-height: 1.06;
+        }
+        .insider-hero h1 .highlight {
+            background: linear-gradient(135deg, var(--sunset), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .insider-hero p {
+            font-size: 17px;
+            opacity: 0.8;
+            max-width: 540px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+           SEARCH & FILTERS
+           ============================================================ */
+        .search-section {
+            background: var(--white);
+            border-bottom: 1px solid var(--line);
+            padding: 20px 0;
+            position: sticky;
+            top: 76px;
+            z-index: 100;
+        }
+        .search-wrapper {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .search-wrapper .search-icon-wrap {
+            color: var(--muted);
+            font-size: 18px;
+        }
+        .search-wrapper input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            font-family: var(--font-sans);
+            padding: 14px 0;
+            color: var(--ink);
+            background: transparent;
+        }
+        .search-wrapper input::placeholder {
+            color: var(--muted);
+        }
+        .search-wrapper .search-btn {
+            background: var(--deep);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.3s var(--ease);
+            white-space: nowrap;
+        }
+        .search-wrapper .search-btn:hover {
+            background: var(--deep-2);
+            transform: scale(1.03);
+        }
+
+        @media (max-width: 768px) {
+            .search-wrapper {
+                flex-wrap: wrap;
+            }
+            .search-wrapper input {
+                width: 100%;
+                order: 1;
+            }
+            .search-wrapper .search-btn {
+                width: 100%;
+                justify-content: center;
+                order: 2;
+            }
+            .search-wrapper .search-icon-wrap {
+                display: none;
+            }
+        }
+
+        /* Category Tabs */
+        .category-tabs-section {
+            background: var(--ivory);
+            padding: 24px 0 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .category-tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scrollbar-width: none;
+        }
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .category-tab {
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            border: 1.5px solid var(--line);
+            transition: all 0.3s var(--ease);
+            background: var(--white);
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .category-tab:hover {
+            border-color: var(--sea);
+            color: var(--sea);
+            transform: translateY(-2px);
+        }
+        .category-tab.active {
+            background: var(--deep);
+            color: var(--white);
+            border-color: var(--deep);
+            transform: scale(1.02);
+        }
+        .category-tab i {
+            font-size: 14px;
+        }
+
+        /* ============================================================
+           RESULTS GRID
+           ============================================================ */
+        .results-section {
+            padding: 40px 0 80px;
+            background: var(--ivory);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .results-header h2 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+        }
+        .results-header .count {
+            font-size: 14px;
+            color: var(--muted);
+        }
+        .results-header .count span {
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== RESULT CARD ===== */
+        .insider-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            transition: all 0.4s var(--ease-bounce);
+            cursor: pointer;
+            transform: perspective(1000px) rotateX(0) rotateY(0);
+        }
+        .insider-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(4deg) translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--sea);
+        }
+
+        .insider-card .card-media {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            position: relative;
+        }
+        .insider-card .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s var(--ease);
+        }
+        .insider-card:hover .card-media img {
+            transform: scale(1.06);
+        }
+
+        .insider-card .card-type {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--white);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        .insider-card .card-type.event {
+            background: rgba(221, 138, 90, 0.9);
+        }
+        .insider-card .card-type.tip {
+            background: rgba(58, 122, 106, 0.9);
+        }
+
+        .insider-card .card-body {
+            padding: 20px 22px 22px;
+        }
+        .insider-card .card-body .tag-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--terracotta);
+        }
+        .insider-card .card-body h3 {
+            font-size: 17px;
+            font-family: var(--font-serif);
+            margin: 4px 0 6px;
+        }
+        .insider-card .card-body p {
+            font-size: 13.5px;
+            color: var(--muted);
+            line-height: 1.6;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .insider-card .card-body .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+        .insider-card .card-body .card-meta i {
+            font-size: 11px;
+            color: var(--sea);
+        }
+
+        /* ============================================================
+           EMPTY STATE
+           ============================================================ */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            border: 2px dashed var(--line);
+        }
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+            color: var(--muted);
+        }
+        .empty-state h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .empty-state p {
+            color: var(--muted);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: var(--deep-2);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 56px 0 28px;
+        }
+        .footer .logo {
+            color: var(--white);
+        }
+        .footer .logo em {
+            color: var(--sunset);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 36px;
+            margin: 36px 0 40px;
+        }
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .footer-grid h4 {
+            color: var(--white);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+        .footer-grid ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        .footer-grid ul a {
+            transition: all 0.3s var(--ease);
+        }
+        .footer-grid ul a:hover {
+            color: var(--white);
+            transform: translateX(4px);
+        }
+        .footer-note {
+            font-size: 12px;
+            opacity: 0.4;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 768px) {
+            .insider-hero {
+                padding: 120px 0 40px;
+            }
+            .insider-hero h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAV ===== -->
+    <nav class="nav" id="siteNav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">Xplore <em>Kapil</em></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Hidden Gems</a></li>
+                <li><a href="stays.html">Stays</a></li>
+                <li><a href="food.html" class="active">Food</a></li>
+                <li><a href="insider.html">Local Guide</a></li>
+                <li><a href="nearby.html">Nearby</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-sm" style="border:1.5px solid currentColor; border-radius:40px; padding:8px 20px; font-weight:600; font-size:12px;">List your place</a>
+                <button class="nav-menu-btn" id="menuOpen" aria-label="Open menu">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-head">
+            <span class="logo">Xplore <em>Kapil</em></span>
+            <button class="mobile-menu-close" id="menuClose">×</button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html">Home</a>
+            <a href="gems.html">Hidden Gems</a>
+            <a href="explore.html">Explore</a>
+            <a href="stays.html">Stays</a>
+            <a href="food.html">Food</a>
+            <a href="nearby.html">Nearby</a>
+            <a href="insider.html">Insider</a>
+        </div>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="insider-hero" id="heroSection">
+        <div class="bg-glow">
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <div class="container hero-content">
+            <span class="eyebrow on-dark"><i class="fas fa-gem" style="margin-right:6px;"></i> Kapil Insider</span>
+            <h1>What's happening &amp;<br/><span class="highlight">what locals love</span></h1>
+            <p>From beach music nights and community feasts to secret spots and local favourites — everything you need to experience Kapil like a local.</p>
+        </div>
+    </section>
+
+    <!-- ===== SEARCH BAR ===== -->
+    <section class="search-section" id="searchSection">
+        <div class="container">
+            <div class="search-wrapper">
+                <span class="search-icon-wrap"><i class="fas fa-search"></i></span>
+                <input type="text" id="searchInput" placeholder="Search insider content..." autocomplete="off" />
+                <button class="search-btn" id="searchBtn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORY TABS ===== -->
+    <section class="category-tabs-section">
+        <div class="container">
+            <div class="category-tabs" id="categoryTabs">
+                <button class="category-tab active" data-category="all"><i class="fas fa-th-large"></i> All</button>
+                <button class="category-tab" data-category="events"><i class="fas fa-calendar"></i> Events</button>
+                <button class="category-tab" data-category="tips"><i class="fas fa-lightbulb"></i> Local Tips</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RESULTS ===== -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-header">
+                <h2>Insider Content</h2>
+                <span class="count"><span id="resultCount">12</span> items found</span>
+            </div>
+            <div class="grid" id="resultsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <span class="logo">Xplore <em>Kapil</em></span>
+            <div class="footer-grid">
+                <div>
+                    <h4>About</h4>
+                    <p style="font-size:14px; max-width:280px; opacity:.85;">A digital local guide for the Kapil coast — built with local coordinators, for every kind of visitor.</p>
+                </div>
+                <div>
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="gems.html"><i class="fas fa-gem"></i> Hidden Gems</a></li>
+                        <li><a href="stays.html"><i class="fas fa-bed"></i> Stays</a></li>
+                        <li><a href="food.html"><i class="fas fa-utensils"></i> Food</a></li>
+                        <li><a href="nearby.html"><i class="fas fa-map-pin"></i> Nearby</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>For businesses</h4>
+                    <ul><li><a href="#"><i class="fas fa-store"></i> List your place</a></li><li><a href="#"><i class="fas fa-user-plus"></i> Become a coordinator</a></li></ul>
+                </div>
+                <div>
+                    <h4>Coming soon</h4>
+                    <ul><li><i class="fas fa-map-pin"></i> Xplore Varkala</li><li><i class="fas fa-map-pin"></i> Xplore Kovalam</li></ul>
+                </div>
+            </div>
+            <p class="footer-note">Xplore Kapil is a prototype. Listings, tips and reviews shown are placeholder content for demonstration only.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== DATA =====
+            const insiderData = [{
+                id: 3,
+                title: 'Onam Sadya Community Feast',
+                type: 'events',
+                tag: '🍛 Food',
+                description: 'A grand community feast featuring traditional Kerala dishes served on banana leaves — a celebration of harvest and togetherness.',
+                image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop',
+                date: 'Onam Week',
+                location: 'Kapil village centre',
+                badge: '🍛 Food'
+            }, {
+                id: 4,
+                title: 'Best Sunset Spot',
+                type: 'tips',
+                tag: '🌅 Local Favourite',
+                description: 'Skip the crowded main beach — the rocky outcrop past Kapil bridge clears out fast and faces the sun dead-on.',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop',
+                date: 'Best at 5:30 PM',
+                location: 'Near Kapil bridge',
+                badge: '🌅 Sunset'
+            }, {
+                id: 5,
+                title: 'Hidden Backwater Channel',
+                type: 'tips',
+                tag: '🌿 Locals Only',
+                description: 'A tiny backwater channel behind the coconut grove near Edava, quiet enough that you\'ll likely have it to yourself.',
+                image: 'https://images.unsplash.com/photo-1593693397690-362cb9666fc2?w=600&h=400&fit=crop',
+                date: 'Best at sunrise',
+                location: 'Edava, 2 km from Kapil',
+                badge: '🌿 Hidden'
+            }, {
+                id: 6,
+                title: 'Best Local Breakfast',
+                type: 'tips',
+                tag: '🍛 Don\'t Miss',
+                description: 'Puttu and kadala curry from the unnamed stall by the bus stand, open from 6am until it sells out.',
+                image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=400&fit=crop',
+                date: '6:00 AM - 9:00 AM',
+                location: 'Kapil bus stand',
+                badge: '🍛 Food'
+            }, {
+                id: 7,
+                title: 'Quiet Beach Walk',
+                type: 'tips',
+                tag: '🚶 Local Favourite',
+                description: 'Walk fifteen minutes north past the last resort and the beach empties out almost completely — pure peace.',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop',
+                date: 'Best in the morning',
+                location: 'North Kapil beach',
+                badge: '🚶 Walk'
+            }, {
+                id: 8,
+                title: 'Sunrise Kayak Trail',
+                type: 'tips',
+                tag: '🚣 Adventure',
+                description: 'Paddle through the calm backwaters as the sun rises over the coconut groves — pure magic.',
+                image: 'https://images.unsplash.com/photo-1535591273668-578e31182c4f?w=600&h=400&fit=crop',
+                date: '6:00 AM - 8:00 AM',
+                location: 'Kappil backwater channel',
+                badge: '🚣 Kayak'
+            }, {
+                id: 9,
+                title: 'Sunset Yoga on the Beach',
+                type: 'events',
+                tag: '🧘 Wellness',
+                description: 'Weekly open-air yoga sessions on the sand as the sun sets — suitable for all levels.',
+                image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop',
+                date: 'Every Sunday, 5:30pm',
+                location: 'Kapil beach',
+                badge: '🧘 Yoga'
+            },{
+                id: 11,
+                title: 'Fishing Village Walk',
+                type: 'tips',
+                tag: '🎣 Experience',
+                description: 'Walk through a working fishing village, meet the families, and see how the day\'s catch comes in.',
+                image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop',
+                date: 'Best in the morning',
+                location: 'Kappil fishing harbour',
+                badge: '🎣 Fishing'
+            }];
+
+            // ===== STATE =====
+            let currentCategory = 'all';
+            let currentSearch = '';
+
+            // ===== DOM REFS =====
+            const grid = document.getElementById('resultsGrid');
+            const resultCount = document.getElementById('resultCount');
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+
+            // ===== HELPERS =====
+            function getFilteredData() {
+                let filtered = [...insiderData];
+
+                if (currentCategory !== 'all') {
+                    filtered = filtered.filter(item => item.type === currentCategory);
+                }
+
+                if (currentSearch.trim()) {
+                    const query = currentSearch.toLowerCase().trim();
+                    filtered = filtered.filter(item =>
+                        item.title.toLowerCase().includes(query) ||
+                        item.description.toLowerCase().includes(query) ||
+                        item.tag.toLowerCase().includes(query) ||
+                        item.location.toLowerCase().includes(query)
+                    );
+                }
+
+                return filtered;
+            }
+
+            function renderResults() {
+                const filtered = getFilteredData();
+                resultCount.textContent = filtered.length;
+
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state reveal">
+                            <span class="icon">🔍</span>
+                            <h3>No content found</h3>
+                            <p>Try adjusting your search or filters to discover insider content about Kapil.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = filtered.map((item, index) => `
+                    <div class="insider-card reveal-scale" style="transition-delay: ${index * 0.04}s">
+                        <div class="card-media">
+                            <img src="${item.image}" alt="${item.title}" loading="lazy" />
+                            <span class="card-type ${item.type}">${item.type === 'events' ? '🎉 Event' : '💡 Tip'}</span>
+                        </div>
+                        <div class="card-body">
+                            <span class="tag-label">${item.tag}</span>
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                            <div class="card-meta">
+                                <span><i class="far fa-calendar"></i> ${item.date}</span>
+                                <span><i class="fas fa-map-pin"></i> ${item.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                requestAnimationFrame(() => {
+                    document.querySelectorAll('.reveal-scale').forEach(el => {
+                        el.classList.add('is-visible');
+                    });
+                });
+            }
+
+            function performSearch() {
+                currentSearch = searchInput.value;
+                renderResults();
+            }
+
+            // ===== EVENT LISTENERS =====
+
+            // Category tabs
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    renderResults();
+                });
+            });
+
+            // Search
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            // ===== NAVIGATION =====
+            const nav = document.getElementById('siteNav');
+            window.addEventListener('scroll', function() {
+                nav.classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            // ===== MOBILE MENU =====
+            const menu = document.getElementById('mobileMenu');
+            document.getElementById('menuOpen')?.addEventListener('click', () => {
+                menu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            document.getElementById('menuClose')?.addEventListener('click', () => {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+            menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+                menu.classList.remove('open');
+                document.body.style.overflow = '';
+            }));
+
+            // ===== SCROLL REVEAL =====
+            const revealElements = document.querySelectorAll('.reveal, .reveal-scale');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ===== INIT =====
+            renderResults();
+
+        })();
+    </script>
+
+</body>
+</html>
