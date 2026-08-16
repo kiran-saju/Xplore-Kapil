@@ -1779,9 +1779,8 @@ section { padding: 100px 0; }
 <!-- ===== HERO ===== -->
 <section class="hero" id="home">
   <div class="hero-media">
-    <video autoplay muted loop playsinline>
-      <source src="assets/videos/waves1.mp4" type="video/mp4" />
-      <img src="assets/images/hero/hero-bg.png" alt="Kapil coastline at golden hour">
+    <video autoplay muted loop playsinline preload="none" poster="assets/images/hero/hero-bg.png">
+      <source data-src="assets/videos/waves1.mp4" type="video/mp4" />
     </video>
   </div>
   <div class="hero-orbs"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
@@ -2268,6 +2267,17 @@ section { padding: 100px 0; }
 <script src="js/main.js"></script>
 
 <script>
+
+  // Load video only after page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('.hero-media video');
+    const source = video.querySelector('source');
+    if (source.dataset.src) {
+      source.src = source.dataset.src;
+      video.load();
+    }
+  });
+
 // ============================================================
 // NEARBY DATA & FILTER
 // ============================================================
