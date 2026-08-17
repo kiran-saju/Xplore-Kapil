@@ -127,47 +127,47 @@
     }).join('');
   }
 
-  // Nearby
-  function renderNearby(cat) {
-    const mapEl = document.getElementById('nearbyMap');
-    const listEl = document.getElementById('nearbyList');
-    if (!mapEl || !listEl) return;
+  // // Nearby
+  // function renderNearby(cat) {
+  //   const mapEl = document.getElementById('nearbyMap');
+  //   const listEl = document.getElementById('nearbyList');
+  //   if (!mapEl || !listEl) return;
 
-    let items = [];
-    if (cat === 'essentials') {
-      items = DATA.essentials.map(function(x) {
-        return { name: x.name, meta: x.category, loc: x.location };
-      });
-    } else if (cat === 'stays') {
-      items = DATA.stays.slice(0, 4).map(function(x) {
-        return { name: x.name, meta: x.category, loc: x.location };
-      });
-    } else if (cat === 'food') {
-      items = DATA.food.slice(0, 4).map(function(x) {
-        return { name: x.name, meta: x.category, loc: x.location };
-      });
-    } else if (cat === 'activities') {
-      items = DATA.activities.slice(0, 4).map(function(x) {
-        return { name: x.name, meta: x.category, loc: x.duration };
-      });
-    }
+  //   let items = [];
+  //   if (cat === 'essentials') {
+  //     items = DATA.essentials.map(function(x) {
+  //       return { name: x.name, meta: x.category, loc: x.location };
+  //     });
+  //   } else if (cat === 'stays') {
+  //     items = DATA.stays.slice(0, 4).map(function(x) {
+  //       return { name: x.name, meta: x.category, loc: x.location };
+  //     });
+  //   } else if (cat === 'food') {
+  //     items = DATA.food.slice(0, 4).map(function(x) {
+  //       return { name: x.name, meta: x.category, loc: x.location };
+  //     });
+  //   } else if (cat === 'activities') {
+  //     items = DATA.activities.slice(0, 4).map(function(x) {
+  //       return { name: x.name, meta: x.category, loc: x.duration };
+  //     });
+  //   }
 
-    const dists = ['180 m', '350 m', '420 m', '600 m'];
-    const pins = [[28, 22], [52, 58], [70, 34], [38, 74]];
+  //   const dists = ['180 m', '350 m', '420 m', '600 m'];
+  //   const pins = [[28, 22], [52, 58], [70, 34], [38, 74]];
 
-    listEl.innerHTML = items.map(function(it, i) {
-      return `
-        <div class="nearby-row">
-          <div><b>${it.name}</b><div class="muted">${it.meta}${it.loc ? ' · ' + it.loc : ''}</div></div>
-          <span class="dist">${dists[i] || '—'}</span>
-        </div>`;
-    }).join('');
+  //   listEl.innerHTML = items.map(function(it, i) {
+  //     return `
+  //       <div class="nearby-row">
+  //         <div><b>${it.name}</b><div class="muted">${it.meta}${it.loc ? ' · ' + it.loc : ''}</div></div>
+  //         <span class="dist">${dists[i] || '—'}</span>
+  //       </div>`;
+  //   }).join('');
 
-    mapEl.innerHTML = items.map(function(it, i) {
-      const [t, l] = pins[i % pins.length];
-      return `<span class="nearby-pin" style="top:${t}%; left:${l}%;" title="${it.name}"></span>`;
-    }).join('');
-  }
+  //   mapEl.innerHTML = items.map(function(it, i) {
+  //     const [t, l] = pins[i % pins.length];
+  //     return `<span class="nearby-pin" style="top:${t}%; left:${l}%;" title="${it.name}"></span>`;
+  //   }).join('');
+  // }
 
   // ===== HERO SEARCH =====
   function initHeroSearch() {
@@ -190,18 +190,18 @@
     }
   }
 
-  // ===== NEARBY TABS =====
-  function initNearbyTabs() {
-    document.querySelectorAll('.nearby-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.nearby-tab').forEach(function(t) {
-          t.classList.remove('active');
-        });
-        tab.classList.add('active');
-        renderNearby(tab.dataset.cat);
-      });
-    });
-  }
+  // // ===== NEARBY TABS =====
+  // function initNearbyTabs() {
+  //   document.querySelectorAll('.nearby-tab').forEach(function(tab) {
+  //     tab.addEventListener('click', function() {
+  //       document.querySelectorAll('.nearby-tab').forEach(function(t) {
+  //         t.classList.remove('active');
+  //       });
+  //       tab.classList.add('active');
+  //       renderNearby(tab.dataset.cat);
+  //     });
+  //   });
+  // }
 
   // ===== INIT =====
   document.addEventListener('DOMContentLoaded', function() {
@@ -217,11 +217,11 @@
     renderActivities();
     renderInsider();
     renderEvents();
-    renderNearby('essentials');
+    // renderNearby('essentials');
 
     // Initialize interactions
     initHeroSearch();
-    initNearbyTabs();
+    // initNearbyTabs();
 
     // Handle explore section anchor
     if (window.location.hash.includes('explore-section')) {

@@ -49,6 +49,9 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+h1, h2, h3, h4, p, button, span {
+    font-family: inherit;
+}
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; padding: 0; margin: 0; }
@@ -904,544 +907,1668 @@ section { padding: 100px 0; }
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 /* ============================================================
-   NEARBY — NEW DESIGN
+   XPLORE NEARBY
+   Premium Local Discovery Section
    ============================================================ */
-.quick-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-bottom: 40px;
-}
 
-.quick-chip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 16px 24px;
-  border-radius: var(--radius-lg);
-  background: var(--white);
-  border: 1.5px solid var(--line);
-  transition: all 0.3s var(--ease-bounce);
-  cursor: pointer;
-  min-width: 90px;
-  box-shadow: var(--shadow-sm);
-}
-
-.quick-chip:hover {
-  transform: translateY(-4px);
-  border-color: var(--sea);
-  box-shadow: var(--shadow);
-}
-
-.quick-chip .chip-icon {
-  font-size: 28px;
-  line-height: 1;
-}
-
-.quick-chip .chip-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ink);
-}
-
-.quick-chip.active {
-  border-color: var(--sea);
-  background: rgba(58, 122, 106, 0.04);
-  box-shadow: 0 8px 24px rgba(58, 122, 106, 0.08);
-}
-
-.nearby-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-
-.nearby-pill {
-  padding: 10px 24px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
-  background: var(--white);
-  border: 1.5px solid var(--line);
-  transition: all 0.3s var(--ease-bounce);
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-}
-
-.nearby-pill:hover {
-  border-color: var(--sea);
-  color: var(--sea);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-
-.nearby-pill.active {
-  background: var(--deep);
-  color: var(--white);
-  border-color: var(--deep);
-  box-shadow: 0 8px 24px rgba(26, 58, 48, 0.15);
-}
-
-.nearby-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-
-@media (max-width: 768px) {
-  .nearby-grid { grid-template-columns: 1fr; }
-}
-
-.nearby-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 22px 24px;
-  border: 1px solid var(--line);
-  transition: all 0.4s var(--ease-bounce);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-}
-
-.nearby-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--sea);
-}
-
-.nearby-card .nc-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-  transition: all 0.4s var(--ease);
-}
-
-.nearby-card:hover .nc-icon {
-  transform: scale(1.05) rotate(-5deg);
-}
-
-.nearby-card .nc-icon.medical { background: rgba(231, 76, 60, 0.08); color: #e74c3c; }
-.nearby-card:hover .nc-icon.medical { background: #e74c3c; color: white; }
-.nearby-card .nc-icon.essential { background: rgba(243, 156, 18, 0.08); color: #f39c12; }
-.nearby-card:hover .nc-icon.essential { background: #f39c12; color: white; }
-.nearby-card .nc-icon.transport { background: rgba(52, 152, 219, 0.08); color: #3498db; }
-.nearby-card:hover .nc-icon.transport { background: #3498db; color: white; }
-.nearby-card .nc-icon.service { background: rgba(142, 68, 173, 0.08); color: #8e44ad; }
-.nearby-card:hover .nc-icon.service { background: #8e44ad; color: white; }
-.nearby-card .nc-icon.entertainment { background: rgba(230, 126, 34, 0.08); color: #e67e22; }
-.nearby-card:hover .nc-icon.entertainment { background: #e67e22; color: white; }
-
-.nearby-card .nc-info { flex: 1; min-width: 0; }
-.nearby-card .nc-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
-.nearby-card .nc-info p { font-size: 13px; color: var(--muted); margin: 0; }
-.nearby-card .nc-info .nc-tag {
-  display: inline-block;
-  font-size: 9px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--sea);
-  background: rgba(58, 122, 106, 0.06);
-  padding: 1px 12px;
-  border-radius: 20px;
-  margin-top: 3px;
-}
-.nearby-card .nc-info .nc-tag.emergency { color: #c0392b; background: rgba(192, 57, 43, 0.06); }
-
-.nearby-card .nc-dist {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--sea);
-  background: rgba(58, 122, 106, 0.04);
-  padding: 4px 16px;
-  border-radius: 30px;
-  white-space: nowrap;
-  transition: all 0.3s var(--ease);
-}
-
-.nearby-card:hover .nc-dist {
-  background: var(--sea);
-  color: var(--white);
-}
-
-/* ============================================================
-   TRIP PLANNER — AI DEMO
-   ============================================================ */
-.planner { background: var(--sand); }
-
-.trip-builder {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 40px 48px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--line);
-  margin-bottom: 40px;
-}
-@media (max-width: 768px) {
-  .trip-builder { padding: 28px 24px; }
-}
-
-.trip-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
-}
-.trip-row:last-of-type { border-bottom: none; }
-
-.trip-label {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  min-width: 80px;
-}
-
-.trip-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  flex: 1;
-}
-
-.trip-opt {
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-  border: 1.5px solid var(--line);
-  transition: all 0.3s var(--ease-bounce);
-  background: var(--white);
-  cursor: pointer;
-}
-
-.trip-opt:hover {
-  border-color: var(--sea);
-  color: var(--sea);
-  transform: translateY(-2px);
-}
-
-.trip-opt.active {
-  background: var(--deep);
-  color: var(--white);
-  border-color: var(--deep);
-  box-shadow: 0 4px 16px rgba(26, 58, 48, 0.12);
-}
-
-.trip-generate {
-  width: 100%;
-  padding: 16px;
-  border-radius: 60px;
-  background: linear-gradient(135deg, var(--deep), var(--sea));
-  color: var(--white);
-  font-size: 16px;
-  font-weight: 700;
-  border: none;
-  transition: all 0.3s var(--ease-bounce);
-  cursor: pointer;
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+.xplore-nearby-section {
+  background: var(--sand);
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
 }
 
+.xplore-nearby-section::before {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: rgba(58, 122, 106, 0.035);
+  top: -250px;
+  right: -180px;
+  pointer-events: none;
+}
+
+
+/* ---------- Intro ---------- */
+
+.xplore-section-intro {
+  max-width: 720px;
+  margin: 0 auto 58px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.xplore-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terracotta);
+}
+
+.xplore-section-intro h2 {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: clamp(34px, 4.5vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+  color: var(--deep);
+}
+
+.xplore-section-intro h2 span {
+  display: block;
+  color: var(--sea);
+}
+
+.xplore-section-intro p {
+  max-width: 620px;
+  margin: 22px auto 0;
+
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+
+/* ---------- Quick Actions ---------- */
+
+.nearby-quick-actions {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  max-width: 1080px;
+  margin: 0 auto 46px;
+}
+
+.nearby-action {
+  position: relative;
+
+  min-height: 112px;
+  padding: 17px 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  text-align: left;
+
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(30, 70, 59, 0.10);
+  border-radius: 18px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.nearby-action:hover {
+  transform: translateY(-6px);
+  background: var(--white);
+  border-color: rgba(58, 122, 106, 0.25);
+  box-shadow: 0 18px 45px rgba(26, 58, 48, 0.10);
+}
+
+.nearby-action-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  transition: transform 0.35s var(--ease);
+}
+
+.nearby-action:hover .nearby-action-icon {
+  transform: scale(1.08);
+}
+
+.nearby-action-icon.medical {
+  background: rgba(192, 57, 43, 0.09);
+  color: #b44b3f;
+}
+
+.nearby-action-icon.finance {
+  background: rgba(201, 168, 76, 0.12);
+  color: #9b7e25;
+}
+
+.nearby-action-icon.transport {
+  background: rgba(58, 122, 106, 0.10);
+  color: var(--sea);
+}
+
+.nearby-action-icon.entertainment {
+  background: rgba(184, 90, 58, 0.10);
+  color: var(--terracotta);
+}
+
+.nearby-action > span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+}
+
+.nearby-action strong {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--deep);
+}
+
+.nearby-action small {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.nearby-action-arrow {
+  position: absolute;
+  top: 18px;
+  right: 17px;
+
+  font-size: 9px;
+  color: rgba(26, 58, 48, 0.28);
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nearby-action:hover .nearby-action-arrow {
+  color: var(--sea);
+  transform: translate(2px, -2px);
+}
+
+
+/* ---------- Category Bar ---------- */
+
+.nearby-category-bar {
+  max-width: 1080px;
+  margin: 0 auto 42px;
+
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 25px;
+
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(26, 58, 48, 0.08);
+  border-radius: 18px;
+}
+
+.nearby-category-label {
+  min-width: 135px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nearby-category-label span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--deep);
+}
+
+.nearby-category-label small {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.nearby-category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.nearby-pill {
+  padding: 9px 15px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  border-radius: 999px;
+
+  background: transparent;
+  border: 1px solid transparent;
+
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nearby-pill i {
+  font-size: 10px;
+}
+
+.nearby-pill:hover {
+  color: var(--deep);
+  background: rgba(255,255,255,0.75);
+}
+
+.nearby-pill.active {
+  color: var(--white);
+  background: var(--deep);
+  border-color: var(--deep);
+  box-shadow: 0 7px 20px rgba(26, 58, 48, 0.15);
+}
+
+
+/* ---------- Results Header ---------- */
+
+.nearby-results-header {
+  max-width: 1080px;
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.nearby-results-kicker {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--terracotta);
+}
+
+.nearby-results-header h3 {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--deep);
+}
+
+.nearby-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 0;
+
+  background: transparent;
+  border: none;
+
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--sea);
+
+  cursor: pointer;
+}
+
+.nearby-view-all i {
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.nearby-view-all:hover i {
+  transform: translateX(4px);
+}
+
+
+/* ---------- Nearby Cards ---------- */
+
+.nearby-grid {
+  max-width: 1080px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.nearby-card {
+  position: relative;
+
+  min-height: 100px;
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(26, 58, 48, 0.08);
+  border-radius: 18px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease),
+    border-color 0.35s ease;
+}
+
+.nearby-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(58, 122, 106, 0.25);
+  box-shadow: 0 16px 38px rgba(26,58,48,0.09);
+}
+
+.nearby-card .nc-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 14px;
+
+  font-size: 17px;
+
+  transition: transform 0.3s ease;
+}
+
+.nearby-card:hover .nc-icon {
+  transform: scale(1.06);
+}
+
+.nearby-card .nc-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.nearby-card .nc-info h4 {
+  margin: 0 0 4px;
+
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--deep);
+}
+
+.nearby-card .nc-info p {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nearby-card .nc-info .nc-tag {
+  display: inline-flex;
+
+  margin-top: 5px;
+  padding: 3px 8px;
+
+  border-radius: 999px;
+
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  color: var(--sea);
+  background: rgba(58,122,106,0.07);
+}
+
+.nearby-card .nc-info .nc-tag.emergency {
+  color: #b44b3f;
+  background: rgba(192,57,43,0.07);
+}
+
+.nearby-card .nc-dist {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: rgba(58,122,106,0.06);
+
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+
+  color: var(--sea);
+
+  white-space: nowrap;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.nearby-card:hover .nc-dist {
+  color: var(--white);
+  background: var(--sea);
+}
+
+
+/* ---------- Local Knowledge Note ---------- */
+
+.nearby-local-note {
+  max-width: 1080px;
+  margin: 28px auto 0;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 18px 20px;
+
+  background: rgba(26,58,48,0.045);
+  border: 1px solid rgba(26,58,48,0.07);
+  border-radius: 16px;
+}
+
+.local-note-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--sea);
+  background: rgba(58,122,106,0.10);
+
+  font-size: 13px;
+}
+
+.nearby-local-note strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--deep);
+}
+
+.nearby-local-note p {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   XPLORE AI TRIP PLANNER
+   ============================================================ */
+
+.xplore-planner {
+  position: relative;
+
+  padding: 130px 0;
+
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(58,122,106,0.055),
+      transparent 30%
+    ),
+    var(--ivory);
+
+  overflow: hidden;
+}
+
+.xplore-planner::before {
+  content: "";
+
+  position: absolute;
+
+  width: 600px;
+  height: 600px;
+
+  border: 1px solid rgba(58,122,106,0.06);
+  border-radius: 50%;
+
+  right: -300px;
+  bottom: -350px;
+
+  pointer-events: none;
+}
+
+
+/* ---------- Planner Intro ---------- */
+
+.planner-intro {
+  max-width: 700px;
+  margin: 0 auto 58px;
+
+  text-align: center;
+}
+
+.planner-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  margin-bottom: 20px;
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: var(--terracotta);
+}
+
+.planner-eyebrow-line {
+  width: 22px;
+  height: 1px;
+  background: var(--terracotta);
+  opacity: 0.55;
+}
+
+.planner-intro h2 {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: clamp(35px, 4.5vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1.08;
+
+  color: var(--deep);
+}
+
+.planner-intro h2 span {
+  display: block;
+  color: var(--sea);
+}
+
+.planner-intro p {
+  max-width: 590px;
+
+  margin: 22px auto 0;
+
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: var(--muted);
+}
+
+
+/* ---------- Builder ---------- */
+
+.trip-builder {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  padding: 42px 46px;
+
+  background: rgba(255,255,255,0.94);
+
+  border: 1px solid rgba(26,58,48,0.08);
+  border-radius: 26px;
+
+  box-shadow:
+    0 25px 70px rgba(26,58,48,0.08),
+    0 2px 10px rgba(26,58,48,0.03);
+
+  backdrop-filter: blur(12px);
+}
+
+.trip-builder-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 30px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.trip-builder-kicker {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+
+  color: var(--terracotta);
+}
+
+.trip-builder-top h3 {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+
+  color: var(--deep);
+}
+
+
+/* ---------- Step Indicator ---------- */
+
+.trip-step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trip-step {
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 800;
+
+  color: var(--muted);
+
+  background: var(--ivory);
+  border: 1px solid var(--line);
+}
+
+.trip-step.active {
+  color: var(--white);
+  background: var(--deep);
+  border-color: var(--deep);
+}
+
+.trip-step-line {
+  width: 18px;
+  height: 1px;
+  background: var(--line);
+}
+
+
+/* ---------- Questions ---------- */
+
+.trip-question {
+  padding: 30px 0;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.trip-question:last-of-type {
+  border-bottom: none;
+}
+
+.trip-question-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+
+  margin-bottom: 20px;
+}
+
+.trip-question-number {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(58,122,106,0.07);
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 800;
+
+  color: var(--sea);
+}
+
+.trip-question-label {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+
+  color: var(--deep);
+}
+
+.trip-question-heading small {
+  display: block;
+
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+/* ---------- Options ---------- */
+
+.trip-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.trip-options.compact {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.trip-opt {
+  position: relative;
+
+  min-height: 68px;
+
+  padding: 12px 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  text-align: left;
+
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s var(--ease),
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.trip-opt:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(58,122,106,0.35);
+
+  box-shadow: 0 10px 25px rgba(26,58,48,0.06);
+}
+
+.trip-opt-icon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 11px;
+
+  color: var(--sea);
+  background: rgba(58,122,106,0.07);
+
+  font-size: 13px;
+}
+
+.trip-opt > span:nth-child(2) {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.trip-opt strong {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--deep);
+}
+
+.trip-opt small {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  color: var(--muted);
+}
+
+.trip-check {
+  position: absolute;
+
+  top: 10px;
+  right: 10px;
+
+  width: 16px;
+  height: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  font-size: 7px;
+
+  color: transparent;
+  background: transparent;
+}
+
+.trip-opt.active {
+  background: rgba(58,122,106,0.045);
+  border-color: var(--sea);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(58,122,106,0.10),
+    0 8px 24px rgba(58,122,106,0.06);
+}
+
+.trip-opt.active .trip-opt-icon {
+  color: var(--white);
+  background: var(--sea);
+}
+
+.trip-opt.active .trip-check {
+  color: var(--white);
+  background: var(--sea);
+}
+
+
+/* ---------- Builder Footer ---------- */
+
+.trip-builder-footer {
+  padding-top: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.trip-ai-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-ai-icon {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--terracotta);
+  background: rgba(184,90,58,0.08);
+
+  font-size: 12px;
+}
+
+.trip-ai-note span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.trip-ai-note strong {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--deep);
+}
+
+.trip-ai-note small {
+  max-width: 350px;
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+
+/* ---------- Generate Button ---------- */
+
+.trip-generate {
+  position: relative;
+
+  min-width: 230px;
+
+  padding: 15px 21px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--deep);
+  color: var(--white);
+
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.3s var(--ease),
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
 .trip-generate::before {
-  content: '';
+  content: "";
+
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--sea), var(--deep));
-  opacity: 0;
-  transition: opacity 0.3s var(--ease);
+
+  background: linear-gradient(
+    90deg,
+    var(--sea),
+    #4c8f7d
+  );
+
+  transform: translateX(-100%);
+
+  transition: transform 0.45s var(--ease);
+}
+
+.trip-generate span,
+.trip-generate i {
+  position: relative;
+  z-index: 1;
+}
+
+.trip-generate i {
+  font-size: 10px;
+
+  transition: transform 0.3s ease;
 }
 
 .trip-generate:hover {
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: 0 12px 40px rgba(58, 122, 106, 0.2);
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(26,58,48,0.20);
 }
 
-.trip-generate:hover::before { opacity: 1; }
-.trip-generate span, .trip-generate i { position: relative; z-index: 1; }
+.trip-generate:hover::before {
+  transform: translateX(0);
+}
+
+.trip-generate:hover i {
+  transform: translateX(4px);
+}
 
 .trip-generate:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none !important;
+  transform: none;
 }
 
-/* AI Loading */
+
+/* ============================================================
+   AI LOADING
+   ============================================================ */
+
 .ai-loading {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 60px 40px;
+  max-width: 1050px;
+
+  margin: 35px auto 0;
+  padding: 65px 40px;
+
   text-align: center;
-  box-shadow: var(--shadow);
+
+  background: var(--white);
+
   border: 1px solid var(--line);
-  margin-bottom: 40px;
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
 }
 
 .ai-thinking {
   position: relative;
-  display: inline-block;
-  margin-bottom: 24px;
+
+  width: 90px;
+  height: 90px;
+
+  margin: 0 auto 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ai-brain {
-  font-size: 48px;
-  color: var(--sea);
-  animation: brain-pulse 1.5s ease-in-out infinite;
   position: relative;
-  z-index: 2;
+  z-index: 5;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: var(--white);
+  background: var(--deep);
+
+  box-shadow: 0 10px 30px rgba(26,58,48,0.15);
+
+  font-size: 17px;
+
+  animation: ai-core-pulse 1.8s ease-in-out infinite;
 }
 
-@keyframes brain-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+@keyframes ai-core-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
 }
 
 .ai-pulse-ring {
   position: absolute;
+
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+
+  width: 65px;
+  height: 65px;
+
   border-radius: 50%;
-  border: 2px solid rgba(58, 122, 106, 0.1);
-  animation: pulse-ring 2s ease-out infinite;
+  border: 1px solid rgba(58,122,106,0.22);
+
+  transform: translate(-50%, -50%);
+
+  animation: planner-ring 2.4s ease-out infinite;
 }
 
-.ai-pulse-ring:nth-child(2) { animation-delay: 0.5s; }
-.ai-pulse-ring:nth-child(3) { animation-delay: 1s; }
+.ai-pulse-ring:nth-child(2) {
+  animation-delay: 0.7s;
+}
 
-@keyframes pulse-ring {
-  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-  100% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
+.ai-pulse-ring:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+@keyframes planner-ring {
+  0% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+.ai-loading-copy > span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+
+  color: var(--terracotta);
 }
 
 .ai-status {
-  font-size: 16px;
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 15px;
   font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 16px;
+
+  color: var(--deep);
 }
 
 .ai-dots {
-  display: inline-block;
-  font-size: 28px;
-  font-weight: 700;
+  margin-top: 8px;
+
+  font-size: 20px;
   color: var(--sea);
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
 
 .ai-dots span {
-  animation: dot-bounce 1.4s infinite;
   display: inline-block;
+
+  animation: dot-bounce 1.4s infinite;
 }
 
-.ai-dots span:nth-child(1) { animation-delay: 0s; }
-.ai-dots span:nth-child(2) { animation-delay: 0.2s; }
-.ai-dots span:nth-child(3) { animation-delay: 0.4s; }
+.ai-dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.ai-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ai-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 @keyframes dot-bounce {
-  0%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+
+  40% {
+    transform: translateY(-6px);
+  }
 }
 
 .ai-progress {
-  max-width: 400px;
-  margin: 0 auto;
-  height: 4px;
-  background: var(--line);
-  border-radius: 4px;
+  width: min(400px, 80%);
+
+  height: 3px;
+
+  margin: 20px auto 0;
+
   overflow: hidden;
+
+  border-radius: 999px;
+
+  background: var(--line);
 }
 
 .ai-progress-bar {
   height: 100%;
+
   width: 0%;
-  background: linear-gradient(90deg, var(--sea), var(--sunset));
-  border-radius: 4px;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    var(--sea),
+    var(--terracotta)
+  );
+
   transition: width 0.3s var(--ease);
 }
 
-/* Generated Itinerary */
+
+/* ============================================================
+   GENERATED ITINERARY
+   ============================================================ */
+
 .itinerary {
+  max-width: 1050px;
+
+  margin: 35px auto 0;
+
+  padding: 42px 46px;
+
   background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: 40px 48px;
-  box-shadow: var(--shadow);
+
   border: 1px solid var(--line);
-  animation: slide-up 0.6s var(--ease-bounce);
+  border-radius: 26px;
+
+  box-shadow: var(--shadow);
+
+  animation: itinerary-enter 0.6s var(--ease);
 }
 
-@keyframes slide-up {
-  0% { opacity: 0; transform: translateY(30px) scale(0.98); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
+@keyframes itinerary-enter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
 
-@media (max-width: 768px) {
-  .itinerary { padding: 28px 24px; }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .itinerary-header {
   text-align: center;
-  margin-bottom: 32px;
+
+  margin-bottom: 35px;
 }
 
 .itinerary-badge {
-  display: inline-block;
-  padding: 4px 16px;
-  border-radius: 30px;
-  background: rgba(221, 138, 90, 0.08);
-  color: var(--sunset);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+
+  border-radius: 999px;
+
+  color: var(--terracotta);
+  background: rgba(184,90,58,0.07);
+
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
 }
 
 .itinerary-header h3 {
-  font-family: var(--font-serif);
-  font-size: 26px;
+  margin: 12px 0 5px;
+
+  font-family: var(--font-sans);
+  font-size: 27px;
   font-weight: 700;
+  letter-spacing: -0.035em;
+
+  color: var(--deep);
 }
 
 .itinerary-header p {
+  margin: 0;
+
+  font-family: var(--font-sans);
+  font-size: 12px;
   color: var(--muted);
-  font-size: 14px;
-  margin-top: 4px;
 }
+
+
+/* ---------- Days ---------- */
 
 .itinerary-days {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-@media (max-width: 768px) {
-  .itinerary-days { grid-template-columns: 1fr; gap: 32px; }
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
 
 .itinerary-day {
-  position: relative;
-  padding: 20px 24px;
+  padding: 22px;
+
   background: var(--ivory);
-  border-radius: var(--radius-lg);
+
   border: 1px solid var(--line);
+  border-radius: 18px;
 }
 
 .day-marker {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+
+  margin-bottom: 20px;
 }
 
 .day-num {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 800;
   color: var(--terracotta);
-  line-height: 1;
 }
 
 .day-name {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 600;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--deep);
 }
 
-.day-stops { padding-left: 4px; }
+.day-stops {
+  padding-left: 3px;
+}
 
 .day-stop {
   position: relative;
-  padding: 0 0 16px 20px;
-  border-left: 2px solid var(--line);
+
+  padding: 0 0 17px 20px;
+
+  border-left: 1px solid rgba(26,58,48,0.14);
 }
-.day-stop:last-child { border-left: 2px solid transparent; padding-bottom: 0; }
+
+.day-stop:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
 
 .day-stop::before {
-  content: '';
+  content: "";
+
   position: absolute;
-  left: -5px;
-  top: 4px;
-  width: 10px;
-  height: 10px;
+
+  left: -4px;
+  top: 3px;
+
+  width: 7px;
+  height: 7px;
+
   border-radius: 50%;
+
   background: var(--terracotta);
-  border: 2px solid var(--ivory);
+
+  box-shadow: 0 0 0 3px var(--ivory);
 }
 
 .stop-time {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
+  display: block;
+
+  margin-bottom: 3px;
+
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 800;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+
   color: var(--muted);
 }
 
 .stop-label {
   display: block;
-  font-family: var(--font-serif);
-  font-size: 15px;
-  font-weight: 600;
-  margin-top: 2px;
-  line-height: 1.3;
+
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.35;
+
+  color: var(--deep);
 }
 
 .stop-tag {
   display: inline-block;
-  font-size: 9px;
-  font-weight: 700;
+
+  margin-top: 5px;
+  padding: 3px 8px;
+
+  border-radius: 999px;
+
+  font-family: var(--font-sans);
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 1px 12px;
-  border-radius: 20px;
-  margin-top: 4px;
 }
 
-.stop-tag.stay { background: rgba(58, 122, 106, 0.08); color: var(--sea); }
-.stop-tag.activity { background: rgba(184, 90, 58, 0.08); color: var(--terracotta); }
-.stop-tag.food { background: rgba(221, 138, 90, 0.08); color: var(--sunset); }
-.stop-tag.attraction { background: rgba(201, 168, 76, 0.08); color: var(--gold); }
+.stop-tag.stay {
+  color: var(--sea);
+  background: rgba(58,122,106,0.08);
+}
+
+.stop-tag.activity {
+  color: var(--terracotta);
+  background: rgba(184,90,58,0.08);
+}
+
+.stop-tag.food {
+  color: var(--sunset);
+  background: rgba(221,138,90,0.08);
+}
+
+.stop-tag.attraction {
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+
+/* ---------- Itinerary Footer ---------- */
 
 .itinerary-footer {
   display: flex;
-  gap: 16px;
   justify-content: center;
-  margin-top: 32px;
   flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 30px;
 }
 
 .itinerary-footer .btn {
-  padding: 12px 32px;
-  font-size: 14px;
+  padding: 11px 25px;
+
+  font-family: var(--font-sans);
+  font-size: 11px;
 }
 
-@media (max-width: 480px) {
-  .itinerary-footer .btn { width: 100%; justify-content: center; }
+.itinerary-clear {
+  margin-top: 15px;
+
+  text-align: center;
 }
 
+.clear-btn {
+  border: none;
+  background: transparent;
+
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: var(--muted);
+
+  cursor: pointer;
+
+  transition: color 0.25s ease;
+}
+
+.clear-btn:hover {
+  color: var(--terracotta);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .nearby-quick-actions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trip-options,
+  .trip-options.compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .xplore-nearby-section,
+  .xplore-planner {
+    padding: 85px 0;
+  }
+
+  .nearby-quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nearby-category-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .nearby-category-label {
+    min-width: 0;
+  }
+
+  .nearby-results-header {
+    align-items: center;
+  }
+
+  .nearby-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-builder {
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+
+  .trip-builder-top {
+    align-items: flex-start;
+  }
+
+  .trip-step-indicator {
+    display: none;
+  }
+
+  .trip-builder-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .trip-ai-note {
+    justify-content: center;
+  }
+
+  .trip-generate {
+    width: 100%;
+  }
+
+  .itinerary {
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+
+  .itinerary-days {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .xplore-section-intro h2,
+  .planner-intro h2 {
+    font-size: 34px;
+  }
+
+  .nearby-quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .nearby-action {
+    min-height: 105px;
+  }
+
+  .nearby-category-pills {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 3px;
+  }
+
+  .nearby-pill {
+    white-space: nowrap;
+  }
+
+  .nearby-results-header h3 {
+    font-size: 18px;
+  }
+
+  .nearby-view-all {
+    font-size: 10px;
+  }
+
+  .nearby-local-note {
+    align-items: flex-start;
+  }
+
+  .trip-options,
+  .trip-options.compact {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-question {
+    padding: 25px 0;
+  }
+
+  .trip-opt {
+    min-height: 62px;
+  }
+
+  .ai-loading {
+    padding: 50px 25px;
+  }
+
+}
 /* ============================================================
    KAPIL INSIDER — Merged Events + Local Tips
    ============================================================ */
@@ -1745,11 +2872,11 @@ section { padding: 100px 0; }
     <a href="#home" class="logo">Xplore <em>Kapil</em></a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
+      <li><a href="#planner-section">Trip Planner</a></li>
       <li><a href="#stays-section">Stays</a></li>
       <li><a href="#food-section">Food</a></li>
       <li><a href="#local-guide-section">Hidden Gems</a></li>
       <li><a href="#nearby-section">Nearby</a></li>
-      <li><a href="#planner-section">Trip Planner</a></li>
       <li><a href="#insider-section">Insider</a></li>
     </ul>
     <div class="nav-actions">
@@ -1767,11 +2894,11 @@ section { padding: 100px 0; }
   </div>
   <div class="mobile-menu-links">
     <a href="#home">Home</a>
+    <a href="#planner-section">Trip Planner</a>
     <a href="#stays-section">Stays</a>
     <a href="#food-section">Food</a>
     <a href="#local-guide-section">Hidden Gems</a>
     <a href="#nearby-section">Nearby</a>
-    <a href="#planner-section">Trip Planner</a>
     <a href="#insider-section">Insider</a>
   </div>
 </div>
@@ -1856,6 +2983,357 @@ section { padding: 100px 0; }
   </div>
 </section>
 
+
+<!-- ============================================================
+     SECTION 5: AI TRIP PLANNER
+     ============================================================ -->
+<section class="planner xplore-planner" id="planner-section">
+
+  <div class="container">
+
+    <div class="planner-intro reveal">
+
+      <div class="planner-eyebrow">
+        <span class="planner-eyebrow-line"></span>
+        AI TRIP PLANNER
+        <span class="planner-eyebrow-line"></span>
+      </div>
+
+      <h2>
+        Your Kapil trip,
+        <span>planned around you.</span>
+      </h2>
+
+      <p>
+        Tell us how you travel, how long you're staying and what you'd like
+        to spend. We'll build a personalised Kapil experience for you.
+      </p>
+
+    </div>
+
+
+    <!-- Trip Builder -->
+    <div class="trip-builder reveal">
+
+      <div class="trip-builder-top">
+
+        <div>
+          <span class="trip-builder-kicker">
+            CREATE YOUR ITINERARY
+          </span>
+
+          <h3>
+            Let's plan your escape.
+          </h3>
+        </div>
+
+        <div class="trip-step-indicator">
+          <span class="trip-step active">01</span>
+          <span class="trip-step-line"></span>
+          <span class="trip-step">02</span>
+          <span class="trip-step-line"></span>
+          <span class="trip-step">03</span>
+        </div>
+
+      </div>
+
+
+      <!-- Travel style -->
+      <div class="trip-question">
+
+        <div class="trip-question-heading">
+
+          <span class="trip-question-number">01</span>
+
+          <div>
+            <span class="trip-question-label">
+              WHO ARE YOU TRAVELLING WITH?
+            </span>
+            <small>
+              We'll tailor your recommendations to your travel style.
+            </small>
+          </div>
+
+        </div>
+
+        <div class="trip-options" data-group="travel">
+
+          <button class="trip-opt active" data-value="couple">
+            <span class="trip-opt-icon">
+              <i class="fas fa-heart"></i>
+            </span>
+            <span>
+              <strong>Couple</strong>
+              <small>Romantic escape</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="family">
+            <span class="trip-opt-icon">
+              <i class="fas fa-people-roof"></i>
+            </span>
+            <span>
+              <strong>Family</strong>
+              <small>Easy & comfortable</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="solo">
+            <span class="trip-opt-icon">
+              <i class="fas fa-person"></i>
+            </span>
+            <span>
+              <strong>Solo</strong>
+              <small>Find your own path</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="backpacker">
+            <span class="trip-opt-icon">
+              <i class="fas fa-backpack"></i>
+            </span>
+            <span>
+              <strong>Backpacker</strong>
+              <small>More adventure, less spend</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Duration -->
+      <div class="trip-question">
+
+        <div class="trip-question-heading">
+
+          <span class="trip-question-number">02</span>
+
+          <div>
+            <span class="trip-question-label">
+              HOW LONG ARE YOU STAYING?
+            </span>
+            <small>
+              We'll balance your days without packing in too much.
+            </small>
+          </div>
+
+        </div>
+
+        <div class="trip-options compact" data-group="duration">
+
+          <button class="trip-opt active" data-value="2">
+            <span>
+              <strong>2 Days</strong>
+              <small>Quick escape</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="3">
+            <span>
+              <strong>3 Days</strong>
+              <small>Perfect weekend</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="5">
+            <span>
+              <strong>5 Days</strong>
+              <small>Slow exploration</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="7">
+            <span>
+              <strong>7 Days</strong>
+              <small>The full experience</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Budget -->
+      <div class="trip-question">
+
+        <div class="trip-question-heading">
+
+          <span class="trip-question-number">03</span>
+
+          <div>
+            <span class="trip-question-label">
+              WHAT'S YOUR BUDGET?
+            </span>
+            <small>
+              Stay, food, experiences and getting around.
+            </small>
+          </div>
+
+        </div>
+
+        <div class="trip-options compact" data-group="budget">
+
+          <button class="trip-opt active" data-value="15000">
+            <span>
+              <strong>₹15,000</strong>
+              <small>Smart & affordable</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="25000">
+            <span>
+              <strong>₹25,000</strong>
+              <small>Comfortable</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="50000">
+            <span>
+              <strong>₹50,000</strong>
+              <small>Premium comfort</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+          <button class="trip-opt" data-value="premium">
+            <span>
+              <strong>Premium</strong>
+              <small>No compromises</small>
+            </span>
+            <i class="fas fa-check trip-check"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Generate -->
+      <div class="trip-builder-footer">
+
+        <div class="trip-ai-note">
+          <span class="trip-ai-icon">
+            <i class="fas fa-sparkles"></i>
+          </span>
+
+          <span>
+            <strong>Powered by Xplore</strong>
+            <small>
+              Your itinerary considers stays, food, activities and local essentials.
+            </small>
+          </span>
+        </div>
+
+        <button class="trip-generate" id="generateBtn">
+          <span>Build my itinerary</span>
+          <i class="fas fa-arrow-right"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- AI Loading -->
+    <div class="ai-loading" id="aiLoading" style="display:none;">
+
+      <div class="ai-thinking">
+
+        <div class="ai-brain">
+          <i class="fas fa-sparkles"></i>
+        </div>
+
+        <div class="ai-pulse-ring"></div>
+        <div class="ai-pulse-ring"></div>
+        <div class="ai-pulse-ring"></div>
+
+      </div>
+
+      <div class="ai-loading-copy">
+        <span>CREATING YOUR KAPIL ESCAPE</span>
+        <p class="ai-status" id="aiStatus">
+          Analyzing your preferences...
+        </p>
+      </div>
+
+      <div class="ai-dots">
+        <span>.</span>
+        <span>.</span>
+        <span>.</span>
+      </div>
+
+      <div class="ai-progress">
+        <div class="ai-progress-bar" id="progressBar"></div>
+      </div>
+
+    </div>
+
+
+    <!-- Generated Itinerary -->
+    <div class="itinerary generated" id="generatedItinerary" style="display:none;">
+
+      <div class="itinerary-header">
+
+        <span class="itinerary-badge">
+          <i class="fas fa-sparkles"></i>
+          AI GENERATED
+        </span>
+
+        <h3 id="itineraryTitle">
+          Your Kapil Escape
+        </h3>
+
+        <p id="itinerarySubtitle">
+          Personalized for you
+        </p>
+
+      </div>
+
+      <div class="itinerary-days" id="itineraryDays">
+        <!-- Generated by JavaScript -->
+      </div>
+
+      <div class="itinerary-footer">
+
+        <button class="btn btn-outline" id="regenerateBtn">
+          <i class="fas fa-rotate"></i>
+          Regenerate
+        </button>
+
+        <button class="btn btn-primary" id="saveItineraryBtn">
+          <i class="fas fa-download"></i>
+          Save Itinerary
+        </button>
+
+      </div>
+
+      <div class="itinerary-clear">
+
+        <button class="clear-btn" id="clearItineraryBtn">
+          <i class="fas fa-times-circle"></i>
+          Clear Results
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 <!-- ============================================================
    SECTION 1: POPULAR STAYS
    ============================================================ -->
@@ -2021,152 +3499,176 @@ section { padding: 100px 0; }
 </section>
 
 <!-- ============================================================
-   SECTION 4: EXPLORE NEARBY
-   ============================================================ -->
-<section id="nearby-section" style="background:var(--sand); padding:100px 0;">
+     SECTION 4: EXPLORE NEARBY
+     ============================================================ -->
+<section id="nearby-section" class="xplore-nearby-section">
   <div class="container">
-    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
-      <span class="eyebrow on-light">Explore Nearby</span>
-      <h2 style="font-size:clamp(32px, 4vw, 44px);">Everything you need,<br>right around you</h2>
-      <p style="font-size:16px; color:var(--muted);">Pharmacies, ATMs, bike rentals, hospitals, cinemas, and more — all mapped and ready for you. No more wandering around looking for essentials.</p>
+
+    <div class="xplore-section-intro reveal">
+      <div class="xplore-eyebrow">
+        <span class="eyebrow-dot"></span>
+        EXPLORE NEARBY
+      </div>
+
+      <h2>
+        Everything you need,
+        <span>right around you.</span>
+      </h2>
+
+      <p>
+        From pharmacies and ATMs to bike rentals, taxis and local services —
+        find the essentials around you without having to search everywhere.
+      </p>
     </div>
 
-    <!-- Quick Action Chips -->
-    <div class="quick-chips reveal" id="quickChips">
-      <button class="quick-chip" data-category="pharmacy">
-        <span class="chip-icon">💊</span>
-        <span class="chip-label">Pharmacy</span>
+    <!-- Quick categories -->
+    <div class="nearby-quick-actions reveal" id="quickChips">
+
+      <button class="nearby-action" data-category="pharmacy">
+        <span class="nearby-action-icon medical">
+          <i class="fas fa-pills"></i>
+        </span>
+        <span>
+          <strong>Pharmacy</strong>
+          <small>Medical</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
       </button>
-      <button class="quick-chip" data-category="atm">
-        <span class="chip-icon">🏧</span>
-        <span class="chip-label">ATM</span>
+
+      <button class="nearby-action" data-category="atm">
+        <span class="nearby-action-icon finance">
+          <i class="fas fa-building-columns"></i>
+        </span>
+        <span>
+          <strong>ATMs</strong>
+          <small>Essentials</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
       </button>
-      <button class="quick-chip" data-category="bike-rental">
-        <span class="chip-icon">🏍️</span>
-        <span class="chip-label">Bike Rental</span>
+
+      <button class="nearby-action" data-category="bike-rental">
+        <span class="nearby-action-icon transport">
+          <i class="fas fa-motorcycle"></i>
+        </span>
+        <span>
+          <strong>Bike Rental</strong>
+          <small>Transport</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
       </button>
-      <button class="quick-chip" data-category="hospital">
-        <span class="chip-icon">🏥</span>
-        <span class="chip-label">Hospital</span>
+
+      <button class="nearby-action" data-category="hospital">
+        <span class="nearby-action-icon medical">
+          <i class="fas fa-hospital"></i>
+        </span>
+        <span>
+          <strong>Hospitals</strong>
+          <small>Medical</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
       </button>
-      <button class="quick-chip" data-category="taxi">
-        <span class="chip-icon">🚕</span>
-        <span class="chip-label">Taxi</span>
+
+      <button class="nearby-action" data-category="taxi">
+        <span class="nearby-action-icon transport">
+          <i class="fas fa-taxi"></i>
+        </span>
+        <span>
+          <strong>Taxi</strong>
+          <small>Transport</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
       </button>
-      <button class="quick-chip" data-category="cinema">
-        <span class="chip-icon">🎬</span>
-        <span class="chip-label">Cinema</span>
+
+      <button class="nearby-action" data-category="cinema">
+        <span class="nearby-action-icon entertainment">
+          <i class="fas fa-film"></i>
+        </span>
+        <span>
+          <strong>Cinema</strong>
+          <small>Entertainment</small>
+        </span>
+        <i class="fas fa-arrow-up-right-from-square nearby-action-arrow"></i>
+      </button>
+
+    </div>
+
+    <!-- Category navigation -->
+    <div class="nearby-category-bar reveal" id="nearbyPills">
+
+      <div class="nearby-category-label">
+        <span>Discover</span>
+        <small>What's around you</small>
+      </div>
+
+      <div class="nearby-category-pills">
+
+        <button class="nearby-pill active" data-cat="all">
+          All places
+        </button>
+
+        <button class="nearby-pill" data-cat="medical">
+          <i class="fas fa-heart-pulse"></i>
+          Medical
+        </button>
+
+        <button class="nearby-pill" data-cat="essentials">
+          <i class="fas fa-bag-shopping"></i>
+          Essentials
+        </button>
+
+        <button class="nearby-pill" data-cat="transport">
+          <i class="fas fa-route"></i>
+          Transport
+        </button>
+
+        <button class="nearby-pill" data-cat="services">
+          <i class="fas fa-wrench"></i>
+          Services
+        </button>
+
+        <button class="nearby-pill" data-cat="entertainment">
+          <i class="fas fa-ticket"></i>
+          Entertainment
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Results -->
+    <div class="nearby-results-header reveal">
+      <div>
+        <span class="nearby-results-kicker">LOCAL PICKS</span>
+        <h3>Useful places around Kapil</h3>
+      </div>
+
+      <button class="nearby-view-all">
+        View all
+        <i class="fas fa-arrow-right"></i>
       </button>
     </div>
 
-    <!-- Category Pills -->
-    <div class="nearby-pills reveal" id="nearbyPills">
-      <button class="nearby-pill active" data-cat="all">All</button>
-      <button class="nearby-pill" data-cat="medical">💊 Medical</button>
-      <button class="nearby-pill" data-cat="essentials">🏧 Essentials</button>
-      <button class="nearby-pill" data-cat="transport">🚗 Transport</button>
-      <button class="nearby-pill" data-cat="services">🔧 Services</button>
-      <button class="nearby-pill" data-cat="entertainment">🎬 Entertainment</button>
-    </div>
-
-    <!-- Results Grid -->
     <div class="nearby-grid reveal" id="nearbyGrid">
       <!-- Cards rendered by JavaScript -->
     </div>
+
+    <div class="nearby-local-note reveal">
+      <div class="local-note-icon">
+        <i class="fas fa-location-dot"></i>
+      </div>
+
+      <div>
+        <strong>Local knowledge, not just listings.</strong>
+        <p>
+          Our recommendations are supported by people who know Kapil locally,
+          helping visitors find places that are actually worth visiting.
+        </p>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ============================================================
-   SECTION 5: TRIP PLANNER (AI-POWERED DEMO)
-   ============================================================ -->
-<section class="planner" id="planner-section" style="padding:100px 0;">
-  <div class="container">
-    <div class="section-head reveal" style="text-align:center; max-width:700px; margin:0 auto 48px;">
-      <span class="eyebrow on-light">Trip Planner</span>
-      <h2 style="font-size:clamp(32px, 4vw, 44px);">Build your perfect<br>Kapil escape</h2>
-      <p style="font-size:16px; color:var(--muted);">Choose your travel style, duration, and budget — our AI will create a personalized itinerary just for you.</p>
-    </div>
-
-    <!-- Trip Builder -->
-    <div class="trip-builder reveal">
-      <div class="trip-row">
-        <div class="trip-label">Travel with</div>
-        <div class="trip-options" data-group="travel">
-          <button class="trip-opt active" data-value="couple">❤️ Couple</button>
-          <button class="trip-opt" data-value="family">👨‍👩‍👧‍👦 Family</button>
-          <button class="trip-opt" data-value="solo">🧘 Solo</button>
-          <button class="trip-opt" data-value="backpacker">🎒 Backpacker</button>
-        </div>
-      </div>
-
-      <div class="trip-row">
-        <div class="trip-label">Duration</div>
-        <div class="trip-options" data-group="duration">
-          <button class="trip-opt active" data-value="2">2 Days</button>
-          <button class="trip-opt" data-value="3">3 Days</button>
-          <button class="trip-opt" data-value="5">5 Days</button>
-          <button class="trip-opt" data-value="7">7 Days</button>
-        </div>
-      </div>
-
-      <div class="trip-row">
-        <div class="trip-label">Budget</div>
-        <div class="trip-options" data-group="budget">
-          <button class="trip-opt active" data-value="15000">₹15,000</button>
-          <button class="trip-opt" data-value="25000">₹25,000</button>
-          <button class="trip-opt" data-value="50000">₹50,000</button>
-          <button class="trip-opt" data-value="premium">✨ Premium</button>
-        </div>
-      </div>
-
-      <button class="trip-generate" id="generateBtn">
-        <i class="fas fa-wand-magic-sparkles"></i> Generate My Itinerary
-      </button>
-    </div>
-
-    <!-- AI Loading Animation -->
-    <div class="ai-loading" id="aiLoading" style="display:none;">
-      <div class="ai-thinking">
-        <div class="ai-brain"><i class="fas fa-brain"></i></div>
-        <div class="ai-pulse-ring"></div>
-        <div class="ai-pulse-ring" style="animation-delay: 0.5s;"></div>
-        <div class="ai-pulse-ring" style="animation-delay: 1s;"></div>
-        <div class="ai-dots"><span>.</span><span>.</span><span>.</span></div>
-      </div>
-      <p class="ai-status" id="aiStatus">Analyzing your preferences...</p>
-      <div class="ai-progress">
-        <div class="ai-progress-bar" id="progressBar"></div>
-      </div>
-    </div>
-
-    <!-- Generated Itinerary -->
-<div class="itinerary generated" id="generatedItinerary" style="display:none;">
-  <div class="itinerary-header">
-    <span class="itinerary-badge">🧠 AI Generated</span>
-    <h3 id="itineraryTitle">Your Kapil Escape</h3>
-    <p id="itinerarySubtitle">Personalized for you</p>
-  </div>
-
-  <div class="itinerary-days" id="itineraryDays">
-    <!-- Generated by JavaScript -->
-  </div>
-
-  <div class="itinerary-footer">
-    <button class="btn btn-outline" id="regenerateBtn" style="border-color:var(--line);">
-      <i class="fas fa-rotate"></i> Regenerate
-    </button>
-    <button class="btn btn-primary" id="saveItineraryBtn">
-      <i class="fas fa-download"></i> Save Itinerary
-    </button>
-  </div>
-
-  <div class="itinerary-clear">
-    <button class="clear-btn" id="clearItineraryBtn">
-      <i class="fas fa-times-circle"></i> Clear Results
-    </button>
-  </div>
-</div>
-</section>
 
 <!-- ============================================================
    SECTION 6: KAPIL INSIDER (Events + Local Tips)
@@ -2362,95 +3864,324 @@ section { padding: 100px 0; }
   const aiStatus = document.getElementById('aiStatus');
 
   const itineraries = {
-    couple: {
-      title: 'Romantic Kapil Escape',
-      subtitle: 'A dreamy getaway for two',
-      days: [
-        {
-          name: 'Settle in',
-          stops: [
-            { time: 'Morning', label: 'Check in at Tide Line Cottage', tag: 'stay' },
-            { time: 'Afternoon', label: 'Sunset cruise on the backwaters', tag: 'activity' },
-            { time: 'Evening', label: 'Candlelight dinner at The Fisherman\'s Table', tag: 'food' }
-          ]
-        },
-        {
-          name: 'Go further',
-          stops: [
-            { time: 'Morning', label: 'Sunrise kayaking on the backwater', tag: 'activity' },
-            { time: 'Afternoon', label: 'Private beach picnic at Secret Cove', tag: 'attraction' },
-            { time: 'Evening', label: 'Sunset yoga, dinner at Amma\'s Seafood Shack', tag: 'food' }
-          ]
-        }
-      ]
-    },
-    family: {
-      title: 'Family Fun in Kapil',
-      subtitle: 'Memories that last a lifetime',
-      days: [
-        {
-          name: 'Settle in',
-          stops: [
-            { time: 'Morning', label: 'Check in at Palm Row Family Resort', tag: 'stay' },
-            { time: 'Afternoon', label: 'Backwater fishing trip with Rajan\'s crew', tag: 'activity' },
-            { time: 'Evening', label: 'Family dinner at Grandma\'s Kitchen', tag: 'food' }
-          ]
-        },
-        {
-          name: 'Go further',
-          stops: [
-            { time: 'Morning', label: 'Village cycling tour for all ages', tag: 'activity' },
-            { time: 'Afternoon', label: 'Beach games & coconut water break', tag: 'attraction' },
-            { time: 'Evening', label: 'Bonfire night with local stories', tag: 'food' }
-          ]
-        }
-      ]
-    },
-    solo: {
-      title: 'Solo Soulful Journey',
-      subtitle: 'Discover yourself in Kapil',
-      days: [
-        {
-          name: 'Settle in',
-          stops: [
-            { time: 'Morning', label: 'Check in at Wanderer\'s Wave Hostel', tag: 'stay' },
-            { time: 'Afternoon', label: 'Sunrise yoga on the beach', tag: 'activity' },
-            { time: 'Evening', label: 'Quiet dinner at Tide & Thyme Café', tag: 'food' }
-          ]
-        },
-        {
-          name: 'Go further',
-          stops: [
-            { time: 'Morning', label: 'Photography walk with local guide', tag: 'activity' },
-            { time: 'Afternoon', label: 'Explore hidden backwater channel', tag: 'attraction' },
-            { time: 'Evening', label: 'Sunset meditation, dinner at local stall', tag: 'food' }
-          ]
-        }
-      ]
-    },
-    backpacker: {
-      title: 'Backpacker\'s Adventure',
-      subtitle: 'Budget-friendly exploration',
-      days: [
-        {
-          name: 'Settle in',
-          stops: [
-            { time: 'Morning', label: 'Check in at Wanderer\'s Wave Hostel', tag: 'stay' },
-            { time: 'Afternoon', label: 'Self-guided village walking tour', tag: 'activity' },
-            { time: 'Evening', label: 'Budget dinner at Coconut Water Junction', tag: 'food' }
-          ]
-        },
-        {
-          name: 'Go further',
-          stops: [
-            { time: 'Morning', label: 'Sunrise kayaking (budget group)', tag: 'activity' },
-            { time: 'Afternoon', label: 'Cycle to hidden backwater channel', tag: 'attraction' },
-            { time: 'Evening', label: 'Local toddy shop experience', tag: 'food' }
-          ]
-        }
-      ]
-    }
-  };
+
+  // ============================================================
+  // COUPLE
+  // ============================================================
+  couple: {
+    title: 'Romantic Kapil Escape',
+    subtitle: 'A dreamy getaway for two',
+
+    days: [
+
+      {
+        name: 'Arrival & Sunset',
+        stops: [
+          { time: 'Morning', label: 'Check in at Tide Line Cottage', tag: 'stay' },
+          { time: 'Afternoon', label: 'Relax by Kapil Beach', tag: 'attraction' },
+          { time: 'Evening', label: 'Sunset at Kapil beach', tag: 'activity' },
+          { time: 'Dinner', label: 'Candlelight dinner at The Fisherman\'s Table', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Backwater Romance',
+        stops: [
+          { time: 'Morning', label: 'Sunrise kayaking on the backwater', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore the hidden backwater channel', tag: 'attraction' },
+          { time: 'Evening', label: 'Sunset yoga on the beach', tag: 'activity' },
+          { time: 'Dinner', label: 'Seafood dinner at Amma\'s Seafood Shack', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Village & Local Life',
+        stops: [
+          { time: 'Morning', label: 'Slow breakfast at Tide & Thyme Café', tag: 'food' },
+          { time: 'Late Morning', label: 'Village cycling tour', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore Kapil village and coconut gardens', tag: 'attraction' },
+          { time: 'Evening', label: 'Quiet beach walk', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Beach Day',
+        stops: [
+          { time: 'Morning', label: 'Leisure breakfast at your stay', tag: 'food' },
+          { time: 'Late Morning', label: 'Relax at Kapil Beach', tag: 'attraction' },
+          { time: 'Afternoon', label: 'Beach picnic for two', tag: 'attraction' },
+          { time: 'Evening', label: 'Golden-hour photography walk', tag: 'activity' }
+        ]
+      },
+
+      {
+        name: 'Adventure Day',
+        stops: [
+          { time: 'Morning', label: 'Backwater fishing trip', tag: 'activity' },
+          { time: 'Afternoon', label: 'Local lunch at Grandma\'s Kitchen', tag: 'food' },
+          { time: 'Evening', label: 'Explore the quieter northern beach', tag: 'attraction' },
+          { time: 'Night', label: 'Relaxing evening at your stay', tag: 'stay' }
+        ]
+      },
+
+      {
+        name: 'Slow Kapil',
+        stops: [
+          { time: 'Morning', label: 'Breakfast with a sea view', tag: 'food' },
+          { time: 'Late Morning', label: 'Relaxed backwater exploration', tag: 'activity' },
+          { time: 'Afternoon', label: 'Free time for shopping and local cafés', tag: 'attraction' },
+          { time: 'Evening', label: 'Final sunset at the beach', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Farewell',
+        stops: [
+          { time: 'Morning', label: 'Final beach walk', tag: 'attraction' },
+          { time: 'Late Morning', label: 'Breakfast at a local café', tag: 'food' },
+          { time: 'Afternoon', label: 'Last-minute Kapil exploration', tag: 'attraction' },
+          { time: 'Evening', label: 'Check out and depart', tag: 'stay' }
+        ]
+      }
+
+    ]
+  },
+
+
+  // ============================================================
+  // FAMILY
+  // ============================================================
+  family: {
+    title: 'Family Fun in Kapil',
+    subtitle: 'Memories that last a lifetime',
+
+    days: [
+
+      {
+        name: 'Arrival & Beach',
+        stops: [
+          { time: 'Morning', label: 'Check in at Palm Row Family Resort', tag: 'stay' },
+          { time: 'Afternoon', label: 'Pool and resort relaxation', tag: 'activity' },
+          { time: 'Evening', label: 'Family beach walk', tag: 'attraction' },
+          { time: 'Dinner', label: 'Dinner at Grandma\'s Kitchen', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Backwater Adventure',
+        stops: [
+          { time: 'Morning', label: 'Backwater fishing trip', tag: 'activity' },
+          { time: 'Afternoon', label: 'Family lunch at a local restaurant', tag: 'food' },
+          { time: 'Evening', label: 'Relax by the backwaters', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Village Exploration',
+        stops: [
+          { time: 'Morning', label: 'Village cycling tour', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore coconut gardens and paddy fields', tag: 'attraction' },
+          { time: 'Evening', label: 'Local snacks and refreshments', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Beach Fun',
+        stops: [
+          { time: 'Morning', label: 'Family breakfast', tag: 'food' },
+          { time: 'Late Morning', label: 'Beach games and swimming', tag: 'activity' },
+          { time: 'Afternoon', label: 'Beach picnic', tag: 'food' },
+          { time: 'Evening', label: 'Sunset family photos', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Nature Day',
+        stops: [
+          { time: 'Morning', label: 'Nature walk around Kapil', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore the hidden backwater channel', tag: 'attraction' },
+          { time: 'Evening', label: 'Family dinner', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Relax & Discover',
+        stops: [
+          { time: 'Morning', label: 'Leisure breakfast at the resort', tag: 'food' },
+          { time: 'Afternoon', label: 'Free time at the resort pool', tag: 'activity' },
+          { time: 'Evening', label: 'Quiet beach walk', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Farewell Day',
+        stops: [
+          { time: 'Morning', label: 'Final beach visit', tag: 'attraction' },
+          { time: 'Late Morning', label: 'Breakfast at a local café', tag: 'food' },
+          { time: 'Afternoon', label: 'Check out and depart', tag: 'stay' }
+        ]
+      }
+
+    ]
+  },
+
+
+  // ============================================================
+  // SOLO
+  // ============================================================
+  solo: {
+    title: 'Solo Soulful Journey',
+    subtitle: 'Discover yourself in Kapil',
+
+    days: [
+
+      {
+        name: 'Arrive & Unwind',
+        stops: [
+          { time: 'Morning', label: 'Check in and settle into your stay', tag: 'stay' },
+          { time: 'Afternoon', label: 'Explore Kapil Beach', tag: 'attraction' },
+          { time: 'Evening', label: 'Sunset meditation by the sea', tag: 'activity' },
+          { time: 'Dinner', label: 'Dinner at Tide & Thyme Café', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Nature & Water',
+        stops: [
+          { time: 'Morning', label: 'Sunrise kayaking', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore the hidden backwater channel', tag: 'attraction' },
+          { time: 'Evening', label: 'Quiet beach walk', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Local Life',
+        stops: [
+          { time: 'Morning', label: 'Local breakfast at the village centre', tag: 'food' },
+          { time: 'Late Morning', label: 'Village cycling tour', tag: 'activity' },
+          { time: 'Afternoon', label: 'Photography walk through the village', tag: 'activity' },
+          { time: 'Evening', label: 'Explore local cafés', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Slow Travel',
+        stops: [
+          { time: 'Morning', label: 'Relaxed breakfast', tag: 'food' },
+          { time: 'Late Morning', label: 'Read and relax by the beach', tag: 'attraction' },
+          { time: 'Afternoon', label: 'Explore Kapil at your own pace', tag: 'attraction' },
+          { time: 'Evening', label: 'Sunset yoga on the beach', tag: 'activity' }
+        ]
+      },
+
+      {
+        name: 'Adventure',
+        stops: [
+          { time: 'Morning', label: 'Backwater fishing trip', tag: 'activity' },
+          { time: 'Afternoon', label: 'Local lunch at Grandma\'s Kitchen', tag: 'food' },
+          { time: 'Evening', label: 'Explore the quieter beach stretches', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Hidden Kapil',
+        stops: [
+          { time: 'Morning', label: 'Discover local breakfast spots', tag: 'food' },
+          { time: 'Afternoon', label: 'Visit hidden local attractions', tag: 'attraction' },
+          { time: 'Evening', label: 'Sunset photography session', tag: 'activity' }
+        ]
+      },
+
+      {
+        name: 'Farewell',
+        stops: [
+          { time: 'Morning', label: 'Final sunrise walk', tag: 'attraction' },
+          { time: 'Late Morning', label: 'Breakfast at a local café', tag: 'food' },
+          { time: 'Afternoon', label: 'Check out and depart', tag: 'stay' }
+        ]
+      }
+
+    ]
+  },
+
+
+  // ============================================================
+  // BACKPACKER
+  // ============================================================
+  backpacker: {
+    title: 'Backpacker\'s Adventure',
+    subtitle: 'Budget-friendly exploration',
+
+    days: [
+
+      {
+        name: 'Arrival',
+        stops: [
+          { time: 'Morning', label: 'Check in and settle into your stay', tag: 'stay' },
+          { time: 'Afternoon', label: 'Explore Kapil on foot', tag: 'attraction' },
+          { time: 'Evening', label: 'Budget dinner at a local eatery', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Water & Nature',
+        stops: [
+          { time: 'Morning', label: 'Budget group kayaking', tag: 'activity' },
+          { time: 'Afternoon', label: 'Explore the backwater channel', tag: 'attraction' },
+          { time: 'Evening', label: 'Local street food', tag: 'food' }
+        ]
+      },
+
+      {
+        name: 'Village Explorer',
+        stops: [
+          { time: 'Morning', label: 'Local breakfast with puttu and kadala curry', tag: 'food' },
+          { time: 'Late Morning', label: 'Village cycling tour', tag: 'activity' },
+          { time: 'Evening', label: 'Walk through Kapil village', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Beach Day',
+        stops: [
+          { time: 'Morning', label: 'Early beach walk', tag: 'attraction' },
+          { time: 'Afternoon', label: 'Budget beach picnic', tag: 'food' },
+          { time: 'Evening', label: 'Sunset photography', tag: 'activity' }
+        ]
+      },
+
+      {
+        name: 'Local Experience',
+        stops: [
+          { time: 'Morning', label: 'Explore the local market', tag: 'attraction' },
+          { time: 'Afternoon', label: 'Try a traditional Kerala lunch', tag: 'food' },
+          { time: 'Evening', label: 'Meet local travellers and explore cafés', tag: 'activity' }
+        ]
+      },
+
+      {
+        name: 'Hidden Kapil',
+        stops: [
+          { time: 'Morning', label: 'Discover a quiet local breakfast spot', tag: 'food' },
+          { time: 'Afternoon', label: 'Cycle to the quieter backwater side', tag: 'activity' },
+          { time: 'Evening', label: 'Relax at the beach', tag: 'attraction' }
+        ]
+      },
+
+      {
+        name: 'Farewell',
+        stops: [
+          { time: 'Morning', label: 'Final sunrise walk', tag: 'attraction' },
+          { time: 'Late Morning', label: 'Last local breakfast', tag: 'food' },
+          { time: 'Afternoon', label: 'Check out and depart', tag: 'stay' }
+        ]
+      }
+
+    ]
+  }
+
+};
+
 
   const budgetTags = {
     '15000': 'Budget-friendly',
@@ -2527,7 +4258,7 @@ section { padding: 100px 0; }
     const dayCount = Math.min(duration, template.days.length);
 
     for (let i = 0; i < dayCount; i++) {
-      const day = template.days[i] || template.days[0];
+      const day = template.days[i];
       const dayNum = String(i + 1).padStart(2, '0');
 
       let stopsHTML = day.stops.map(stop => `
